@@ -19,17 +19,17 @@ namespace BackUpDb
         {
             this.hostname = hostname;
             this.port = port;
-            connectstring.Append("Data Source=" + this.hostname + ":" + this.port + ";");
+            connectstring.Append( this.hostname + ":" + this.port + ";");
         }
         public void setUsername(String username)
         {
             this.username = username;
-            connectstring.Append("Data Source=" + this.username + ";");
+            connectstring.Append( this.username + ";");
         }
         public void setPassword(String password)
         {
             this.password = password;
-            connectstring.Append("Data Source=" + this.password + ";");
+            connectstring.Append( this.password + ";");
         }
         public Boolean isConnected()
         {
