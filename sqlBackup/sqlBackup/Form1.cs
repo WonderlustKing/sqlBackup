@@ -57,7 +57,7 @@ namespace BackUpDb
             {
                 porttextbox.Text = "3306";
                 hostnametextbox.Text = null;
-                    porttextbox.Text = null;
+                porttextbox.Text = null;
                 usernametextbox.Text = null;
                 passwordtextbox.Text = null;
             }
