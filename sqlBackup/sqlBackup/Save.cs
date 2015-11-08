@@ -74,7 +74,7 @@ namespace BackUpDb
             String getpath = folder.SelectedPath;
             Console.WriteLine(getpath);
             Boolean flag2 = false;//flag an ola pane kala kai ginei to save
-            folderpath.Append(getpath  + getHostname() + ".txt");//onoma tou arxeiou pou tha ginei to save
+            folderpath.Append(getpath+"\\"  + getHostname() + ".txt");//onoma tou arxeiou pou tha ginei to save
             StreamWriter writter = null;
             if (File.Exists(Convert.ToString(folderpath)))
             {//elenxo an to arxeio uparxei
