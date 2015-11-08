@@ -39,9 +39,13 @@
             this.usernametextbox = new System.Windows.Forms.TextBox();
             this.passwordtextbox = new System.Windows.Forms.TextBox();
             this.porttextbox = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.SaveCheckBox = new System.Windows.Forms.CheckBox();
             this.MySQLRadiobutton = new System.Windows.Forms.RadioButton();
             this.OracleRadionButton = new System.Windows.Forms.RadioButton();
+            this.LoadButton = new System.Windows.Forms.Button();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.savedlabel = new System.Windows.Forms.Label();
+            this.wheresaved = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -82,7 +86,7 @@
             // 
             // connectButton
             // 
-            this.connectButton.Location = new System.Drawing.Point(488, 176);
+            this.connectButton.Location = new System.Drawing.Point(488, 114);
             this.connectButton.Name = "connectButton";
             this.connectButton.Size = new System.Drawing.Size(75, 23);
             this.connectButton.TabIndex = 4;
@@ -92,7 +96,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(488, 216);
+            this.cancelButton.Location = new System.Drawing.Point(488, 152);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 5;
@@ -132,15 +136,16 @@
             this.porttextbox.TabIndex = 9;
             this.porttextbox.Text = "3306";
             // 
-            // checkBox1
+            // SaveCheckBox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(16, 195);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(95, 17);
-            this.checkBox1.TabIndex = 12;
-            this.checkBox1.Text = "Remember Me";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.SaveCheckBox.AutoSize = true;
+            this.SaveCheckBox.Location = new System.Drawing.Point(16, 195);
+            this.SaveCheckBox.Name = "SaveCheckBox";
+            this.SaveCheckBox.Size = new System.Drawing.Size(95, 17);
+            this.SaveCheckBox.TabIndex = 12;
+            this.SaveCheckBox.Text = "Remember Me";
+            this.SaveCheckBox.UseVisualStyleBackColor = true;
+            this.SaveCheckBox.CheckedChanged += new System.EventHandler(this.SaveCheckBox_CheckedChanged);
             // 
             // MySQLRadiobutton
             // 
@@ -164,14 +169,42 @@
             this.OracleRadionButton.Text = "Oracle";
             this.OracleRadionButton.UseVisualStyleBackColor = true;
             // 
+            // LoadButton
+            // 
+            this.LoadButton.Location = new System.Drawing.Point(131, 195);
+            this.LoadButton.Name = "LoadButton";
+            this.LoadButton.Size = new System.Drawing.Size(75, 23);
+            this.LoadButton.TabIndex = 15;
+            this.LoadButton.Text = "Load";
+            this.LoadButton.UseVisualStyleBackColor = true;
+            // 
+            // savedlabel
+            // 
+            this.savedlabel.AutoSize = true;
+            this.savedlabel.Location = new System.Drawing.Point(14, 226);
+            this.savedlabel.Name = "savedlabel";
+            this.savedlabel.Size = new System.Drawing.Size(0, 13);
+            this.savedlabel.TabIndex = 16;
+            // 
+            // wheresaved
+            // 
+            this.wheresaved.AutoSize = true;
+            this.wheresaved.Location = new System.Drawing.Point(104, 226);
+            this.wheresaved.Name = "wheresaved";
+            this.wheresaved.Size = new System.Drawing.Size(0, 13);
+            this.wheresaved.TabIndex = 17;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(617, 251);
+            this.Controls.Add(this.wheresaved);
+            this.Controls.Add(this.savedlabel);
+            this.Controls.Add(this.LoadButton);
             this.Controls.Add(this.OracleRadionButton);
             this.Controls.Add(this.MySQLRadiobutton);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.SaveCheckBox);
             this.Controls.Add(this.porttextbox);
             this.Controls.Add(this.passwordtextbox);
             this.Controls.Add(this.usernametextbox);
@@ -202,9 +235,13 @@
         private System.Windows.Forms.TextBox usernametextbox;
         private System.Windows.Forms.TextBox passwordtextbox;
         private System.Windows.Forms.TextBox porttextbox;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox SaveCheckBox;
         private System.Windows.Forms.RadioButton MySQLRadiobutton;
         private System.Windows.Forms.RadioButton OracleRadionButton;
+        private System.Windows.Forms.Button LoadButton;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.Label savedlabel;
+        private System.Windows.Forms.Label wheresaved;
     }
 
 }

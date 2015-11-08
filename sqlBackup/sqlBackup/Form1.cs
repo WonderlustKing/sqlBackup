@@ -3,6 +3,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
+using System.IO;
 
 namespace BackUpDb
 {
@@ -66,6 +67,30 @@ namespace BackUpDb
         {
             
         Application.Exit();
+        }
+
+        private void SaveCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            
+            if (SaveCheckBox.Checked)
+            {               
+                Save save = new Save(hostnametextbox.Text, porttextbox.Text, usernametextbox.Text, passwordtextbox.Text);
+                save.SaveME();
+                if (save.Exist())
+                {
+                    savedlabel.Text = "Already Exist";
+                    wheresaved.Text = save.PathToShow();
+                }
+                else
+                {
+                    savedlabel.Text = "Saved To ->";
+                    wheresaved.Text = save.PathToShow();
+                }              
+            }
+            else
+            {
+                SaveCheckBox.Checked = false;
+            }
         }
     }
 }
