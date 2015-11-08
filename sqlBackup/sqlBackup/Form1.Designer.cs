@@ -177,6 +177,7 @@
             this.LoadButton.TabIndex = 15;
             this.LoadButton.Text = "Load";
             this.LoadButton.UseVisualStyleBackColor = true;
+            this.LoadButton.Click += new System.EventHandler(this.LoadButton_Click);
             // 
             // savedlabel
             // 

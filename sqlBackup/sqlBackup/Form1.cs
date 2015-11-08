@@ -48,7 +48,14 @@ namespace BackUpDb
                 }
                      
             }
-            tcpclnt.Connect(conser.getHostname(),Convert.ToInt32(conser.getPort()));
+            try
+            {
+                tcpclnt.Connect(conser.getHostname(), Convert.ToInt32(conser.getPort()));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             if (tcpclnt.Connected) {
                 Form2 forma2 = new Form2();
                 this.Visible = false;
@@ -68,7 +75,7 @@ namespace BackUpDb
             
         Application.Exit();
         }
-
+        //gia to Save otan to remember me einai pathmeno
         private void SaveCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             
@@ -92,5 +99,15 @@ namespace BackUpDb
                 SaveCheckBox.Checked = false;
             }
         }
+        //otan o xrhsths thelei na fortosei ena save pou exei kanei
+        private void LoadButton_Click(object sender, EventArgs e)
+        {
+            Load loadfile = new Load();
+            loadfile.LoadFromFile();
+            if (loadfile.Connected())
+            {
+                this.Visible = false;
+            }
+         }
     }
 }
