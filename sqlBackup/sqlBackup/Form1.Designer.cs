@@ -51,7 +51,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 78);
+            this.label1.Location = new System.Drawing.Point(12, 81);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 0;
@@ -60,7 +60,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 114);
+            this.label2.Location = new System.Drawing.Point(11, 124);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(61, 13);
             this.label2.TabIndex = 1;
@@ -78,7 +78,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(327, 71);
+            this.label4.Location = new System.Drawing.Point(254, 81);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(32, 13);
             this.label4.TabIndex = 3;
@@ -86,7 +86,7 @@
             // 
             // connectButton
             // 
-            this.connectButton.Location = new System.Drawing.Point(488, 114);
+            this.connectButton.Location = new System.Drawing.Point(313, 124);
             this.connectButton.Name = "connectButton";
             this.connectButton.Size = new System.Drawing.Size(75, 23);
             this.connectButton.TabIndex = 4;
@@ -96,7 +96,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(488, 152);
+            this.cancelButton.Location = new System.Drawing.Point(313, 167);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 5;
@@ -106,17 +106,17 @@
             // 
             // hostnametextbox
             // 
-            this.hostnametextbox.Location = new System.Drawing.Point(104, 71);
+            this.hostnametextbox.Location = new System.Drawing.Point(104, 78);
             this.hostnametextbox.Name = "hostnametextbox";
-            this.hostnametextbox.Size = new System.Drawing.Size(217, 20);
+            this.hostnametextbox.Size = new System.Drawing.Size(126, 20);
             this.hostnametextbox.TabIndex = 6;
             this.hostnametextbox.Text = "127.0.0.1";
             // 
             // usernametextbox
             // 
-            this.usernametextbox.Location = new System.Drawing.Point(104, 111);
+            this.usernametextbox.Location = new System.Drawing.Point(104, 117);
             this.usernametextbox.Name = "usernametextbox";
-            this.usernametextbox.Size = new System.Drawing.Size(361, 20);
+            this.usernametextbox.Size = new System.Drawing.Size(126, 20);
             this.usernametextbox.TabIndex = 7;
             this.usernametextbox.Text = "root";
             // 
@@ -125,12 +125,12 @@
             this.passwordtextbox.Location = new System.Drawing.Point(104, 150);
             this.passwordtextbox.Name = "passwordtextbox";
             this.passwordtextbox.PasswordChar = '*';
-            this.passwordtextbox.Size = new System.Drawing.Size(361, 20);
+            this.passwordtextbox.Size = new System.Drawing.Size(126, 20);
             this.passwordtextbox.TabIndex = 8;
             // 
             // porttextbox
             // 
-            this.porttextbox.Location = new System.Drawing.Point(365, 68);
+            this.porttextbox.Location = new System.Drawing.Point(292, 78);
             this.porttextbox.Name = "porttextbox";
             this.porttextbox.Size = new System.Drawing.Size(100, 20);
             this.porttextbox.TabIndex = 9;
@@ -151,7 +151,7 @@
             // 
             this.MySQLRadiobutton.AutoSize = true;
             this.MySQLRadiobutton.Checked = true;
-            this.MySQLRadiobutton.Location = new System.Drawing.Point(499, 13);
+            this.MySQLRadiobutton.Location = new System.Drawing.Point(332, 12);
             this.MySQLRadiobutton.Name = "MySQLRadiobutton";
             this.MySQLRadiobutton.Size = new System.Drawing.Size(60, 17);
             this.MySQLRadiobutton.TabIndex = 13;
@@ -162,7 +162,7 @@
             // OracleRadionButton
             // 
             this.OracleRadionButton.AutoSize = true;
-            this.OracleRadionButton.Location = new System.Drawing.Point(499, 37);
+            this.OracleRadionButton.Location = new System.Drawing.Point(332, 36);
             this.OracleRadionButton.Name = "OracleRadionButton";
             this.OracleRadionButton.Size = new System.Drawing.Size(56, 17);
             this.OracleRadionButton.TabIndex = 14;
@@ -199,7 +199,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(617, 251);
+            this.ClientSize = new System.Drawing.Size(406, 251);
             this.Controls.Add(this.wheresaved);
             this.Controls.Add(this.savedlabel);
             this.Controls.Add(this.LoadButton);
