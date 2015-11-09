@@ -23,12 +23,28 @@ namespace BackUpDb
         Form3 form3 = new Form3();
         private void SchedulecheckBox_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (SchedulecheckBox.Checked)
+            {
+                ScheduleLabel.Enabled = true;
+                ScheduleTime.Enabled = true;
+            } else
+            {
+                ScheduleLabel.Enabled = false;
+                ScheduleTime.Enabled = false;
+            }
         }
 
         private void emailnotcheckBox_CheckedChanged(object sender, EventArgs e)
         {
-
+            if(emailnotcheckBox.Checked)
+            {
+                emailLabel.Enabled = true;
+                emailtextBox.Enabled = true;
+            } else
+            {
+                emailLabel.Enabled = false;
+                emailtextBox.Enabled = false;
+            }
         }
 
         private void Runbutton_Click(object sender, EventArgs e)
@@ -50,6 +66,11 @@ namespace BackUpDb
         private void Form2_Load(object sender, EventArgs e)
         {
             
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
