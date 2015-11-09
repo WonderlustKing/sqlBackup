@@ -109,7 +109,7 @@ namespace BackUpDb
                 this.Visible = false;
             }
          }
-        public bool getConnection
+        public bool getConnection//stelnei sthn forma 2 an to connection me ton server exei ginei
         {
             get { return tcpclnt.Connected; }
         }

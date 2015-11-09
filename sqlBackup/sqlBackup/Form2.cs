@@ -17,7 +17,7 @@ namespace BackUpDb
 
         public Form2()
         {
-
+            this.Enabled = false;
             InitializeComponent();
         }
         private Form1 connectForm = null;
@@ -55,7 +55,10 @@ namespace BackUpDb
 
         private void Runbutton_Click(object sender, EventArgs e)
         {
-            form3.Visible = true;
+            if (this.connectForm.getConnection)
+            {
+                form3.Visible = true;
+            }
         }
 
         private void Form2_Click(object sender, EventArgs e)
@@ -71,8 +74,11 @@ namespace BackUpDb
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            //bool b = this.connectForm.getConnection();
-            label1.Text =this.connectForm.getConnection.ToString();
+            if (this.connectForm.getConnection)//elexnos an einai sundedemenos me to server prepei na mpei pantou sxedon
+            {
+
+            }
+            
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
