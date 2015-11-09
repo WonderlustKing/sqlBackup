@@ -57,7 +57,7 @@ namespace BackUpDb
                 MessageBox.Show(ex.Message);
             }
             if (tcpclnt.Connected) {
-                Form2 forma2 = new Form2();
+                Form2 forma2 = new Form2(this);
                 this.Visible = false;
                 forma2.Visible = true;
             }
@@ -109,5 +109,9 @@ namespace BackUpDb
                 this.Visible = false;
             }
          }
+        public bool getConnection
+        {
+            get { return tcpclnt.Connected; }
+        }
     }
 }

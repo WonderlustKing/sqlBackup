@@ -20,7 +20,13 @@ namespace BackUpDb
 
             InitializeComponent();
         }
+        private Form1 connectForm = null;
         Form3 form3 = new Form3();
+        public Form2(Form callingForm)
+        {
+            connectForm = callingForm as Form1;
+            InitializeComponent();
+        }
         private void SchedulecheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (SchedulecheckBox.Checked)
@@ -65,7 +71,8 @@ namespace BackUpDb
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            
+            //bool b = this.connectForm.getConnection();
+            label1.Text =this.connectForm.getConnection.ToString();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
