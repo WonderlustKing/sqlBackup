@@ -9,19 +9,19 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
+using System.Net.Mail;
 
 namespace BackUpDb
 {
     public partial class Form2 : Form
     {
-
+        Form3 form3 = new Form3();
+        SendEmail mail = null;
         public Form2()
         {
-            this.Enabled = false;
             InitializeComponent();
         }
-        private Form1 connectForm = null;
-        Form3 form3 = new Form3();
+        private Form1 connectForm = null;       
         public Form2(Form callingForm)
         {
             connectForm = callingForm as Form1;
@@ -33,6 +33,7 @@ namespace BackUpDb
             {
                 ScheduleLabel.Enabled = true;
                 ScheduleTime.Enabled = true;
+                
             } else
             {
                 ScheduleLabel.Enabled = false;
@@ -42,10 +43,15 @@ namespace BackUpDb
 
         private void emailnotcheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if(emailnotcheckBox.Checked)
+            if (emailnotcheckBox.Checked)
             {
-                emailLabel.Enabled = true;
-                emailtextBox.Enabled = true;
+                if (this.connectForm.getConnection)//elexnos an einai sundedemenos me to server prepei na mpei pantou sxedon
+                {
+                   
+                        emailLabel.Enabled = true;
+                        emailtextBox.Enabled = true;
+                        
+                }
             } else
             {
                 emailLabel.Enabled = false;
@@ -58,6 +64,9 @@ namespace BackUpDb
             if (this.connectForm.getConnection)
             {
                 form3.Visible = true;
+               // mail = new SendEmail(emailtextBox.Text);
+               // mail.PrepareEmail();
+               // mail.setEmail();
             }
         }
 

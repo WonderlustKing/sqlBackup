@@ -41,12 +41,7 @@ namespace BackUpDb
                 if (passwordtextbox.Text != "")
                 {// prepei na dwsei pass
                     conser.setPassword(passwordtextbox.Text);
-                }
-                else
-                {
-                    MessageBox.Show("Insert password to Continue");//msgbox an den dwsei pass
-                }
-                     
+                }                     
             }
             try
             {
