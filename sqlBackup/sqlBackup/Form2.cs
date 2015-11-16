@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
 using System.Net.Mail;
+using System.IO;
+using System.Diagnostics;
 
 namespace BackUpDb
 {
@@ -93,6 +95,65 @@ namespace BackUpDb
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void getBackuplinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Backup();
+        }
+
+        private void Backup()
+        {
+            try {
+                string databaseName = "theatrodb";
+                DateTime backupTime = DateTime.Now;
+
+                int year = backupTime.Year;
+                int month = backupTime.Month;
+
+                int day = backupTime.Day;
+                int hour = backupTime.Hour;
+
+                int minute = backupTime.Minute;
+                int second = backupTime.Second;
+
+                int ms = backupTime.Millisecond;
+                String tmestr = backupTime.ToString();
+
+                //change path and name for the backup file 
+                tmestr = "C:\\Users\\chris\\" + databaseName + year + "-" + month + "-" + day + "-" + hour + ".sql";
+
+                StreamWriter file = new StreamWriter(tmestr);
+                ProcessStartInfo proc = new ProcessStartInfo();
+
+                //change the credentials 
+                string cmd = string.Format(@"-h{0} -u{1} -p{2} --opt --databases {3}","yourhost","your_username","your_password","your_database");
+                
+                //also if your mysqldump path is different from mine change it to
+                proc.FileName = "C:\\xampp\\mysql\\bin\\mysqldump";
+
+                proc.RedirectStandardInput = false;
+                proc.RedirectStandardOutput = true;
+
+                proc.Arguments = cmd;
+
+                proc.UseShellExecute = false;
+                Process p = Process.Start(proc);
+
+                string res;
+                res = p.StandardOutput.ReadToEnd();
+
+                file.WriteLine(res);
+                p.WaitForExit();
+                file.Close();
+
+                MessageBox.Show("Database Backup has been completed successfully!");
+                
+            }
+            catch (IOException e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
     }
 }
