@@ -108,5 +108,18 @@ namespace BackUpDb
         {
             get { return tcpclnt.Connected; }
         }
+        public string getHostname
+        {
+            get { return hostnametextbox.Text; }
+        }
+        public string getUsername
+        {
+            get { return usernametextbox.Text; }
+        }
+        public string getPassword
+        {
+            get { return passwordtextbox.Text; }
+        }
+        
     }
 }
