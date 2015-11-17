@@ -12,6 +12,7 @@ using System.Net.Sockets;
 using System.Net.Mail;
 using System.IO;
 using System.Diagnostics;
+using sqlBackup;
 
 namespace BackUpDb
 {
@@ -19,14 +20,18 @@ namespace BackUpDb
     {
         Form3 form3 = new Form3();
         SendEmail mail = null;
+        private Form1 connectForm = null;
+        private DownloadDb downloadDB;
         public Form2()
         {
             InitializeComponent();
         }
-        private Form1 connectForm = null;       
+            
         public Form2(Form callingForm)
         {
             connectForm = callingForm as Form1;
+            // change the databaseName with yours
+            downloadDB = new DownloadDb(connectForm.getHostname,connectForm.getUsername,connectForm.getPassword,"databaseName");
             InitializeComponent();
         }
         private void SchedulecheckBox_CheckedChanged(object sender, EventArgs e)
@@ -99,61 +104,12 @@ namespace BackUpDb
 
         private void getBackuplinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Backup();
+            //check the response of backupdb() method, if true successed, else failed
+            Boolean flag = downloadDB.backupdb();
+            if (flag) MessageBox.Show("Backup has successfully completed!");
+            else MessageBox.Show("An error has occured, backup failed");
         }
 
-        private void Backup()
-        {
-            try {
-                string databaseName = "theatrodb";
-                DateTime backupTime = DateTime.Now;
-
-                int year = backupTime.Year;
-                int month = backupTime.Month;
-
-                int day = backupTime.Day;
-                int hour = backupTime.Hour;
-
-                int minute = backupTime.Minute;
-                int second = backupTime.Second;
-
-                int ms = backupTime.Millisecond;
-                String tmestr = backupTime.ToString();
-
-                //change path and name for the backup file 
-                tmestr = "C:\\Users\\chris\\" + databaseName + year + "-" + month + "-" + day + "-" + hour + ".sql";
-
-                StreamWriter file = new StreamWriter(tmestr);
-                ProcessStartInfo proc = new ProcessStartInfo();
-
-                //change the credentials 
-                string cmd = string.Format(@"-h{0} -u{1} -p{2} --opt --databases {3}","yourhost","your_username","your_password","your_database");
-                
-                //also if your mysqldump path is different from mine change it to
-                proc.FileName = "C:\\xampp\\mysql\\bin\\mysqldump";
-
-                proc.RedirectStandardInput = false;
-                proc.RedirectStandardOutput = true;
-
-                proc.Arguments = cmd;
-
-                proc.UseShellExecute = false;
-                Process p = Process.Start(proc);
-
-                string res;
-                res = p.StandardOutput.ReadToEnd();
-
-                file.WriteLine(res);
-                p.WaitForExit();
-                file.Close();
-
-                MessageBox.Show("Database Backup has been completed successfully!");
-                
-            }
-            catch (IOException e)
-            {
-                MessageBox.Show(e.Message);
-            }
-        }
+       
     }
 }
