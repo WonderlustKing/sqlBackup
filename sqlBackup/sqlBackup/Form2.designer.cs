@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -52,14 +51,14 @@
             this.selectDestLabel = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.cbUploadFtp = new System.Windows.Forms.CheckBox();
-            this.localDest = new System.Windows.Forms.Label();
-            this.tbLocalDest = new System.Windows.Forms.TextBox();
-            this.email = new System.Windows.Forms.Label();
-            this.Scheduler = new System.Windows.Forms.Label();
             this.bChangeLocalDest = new System.Windows.Forms.Button();
+            this.tbLocalDest = new System.Windows.Forms.TextBox();
+            this.localDest = new System.Windows.Forms.Label();
+            this.cbUploadFtp = new System.Windows.Forms.CheckBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.email = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.Scheduler = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -81,7 +80,6 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newConnectionToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
             this.toolStripSeparator1,
@@ -90,33 +88,27 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
-            // newConnectionToolStripMenuItem
-            // 
-            this.newConnectionToolStripMenuItem.Name = "newConnectionToolStripMenuItem";
-            this.newConnectionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.newConnectionToolStripMenuItem.Text = "Change Connection";
-            // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAsToolStripMenuItem.Text = "Save As...";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -125,7 +117,7 @@
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.logFileToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.toolsToolStripMenuItem.Text = "&Tools";
             // 
             // logFileToolStripMenuItem
@@ -146,7 +138,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(179, 23);
             this.button1.TabIndex = 1;
-            this.button1.Text = "Connect to MySQL Server";
+            this.button1.Text = "Show Databases";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -274,6 +266,43 @@
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             // 
+            // bChangeLocalDest
+            // 
+            this.bChangeLocalDest.Location = new System.Drawing.Point(161, 89);
+            this.bChangeLocalDest.Name = "bChangeLocalDest";
+            this.bChangeLocalDest.Size = new System.Drawing.Size(75, 23);
+            this.bChangeLocalDest.TabIndex = 17;
+            this.bChangeLocalDest.Text = "Change";
+            this.bChangeLocalDest.UseVisualStyleBackColor = true;
+            this.bChangeLocalDest.Click += new System.EventHandler(this.bChangeLocalDest_Click);
+            // 
+            // tbLocalDest
+            // 
+            this.tbLocalDest.Location = new System.Drawing.Point(20, 63);
+            this.tbLocalDest.Name = "tbLocalDest";
+            this.tbLocalDest.ReadOnly = true;
+            this.tbLocalDest.Size = new System.Drawing.Size(216, 20);
+            this.tbLocalDest.TabIndex = 16;
+            // 
+            // localDest
+            // 
+            this.localDest.AutoSize = true;
+            this.localDest.Location = new System.Drawing.Point(19, 47);
+            this.localDest.Name = "localDest";
+            this.localDest.Size = new System.Drawing.Size(90, 13);
+            this.localDest.TabIndex = 15;
+            this.localDest.Text = "Local destination:";
+            // 
+            // cbUploadFtp
+            // 
+            this.cbUploadFtp.AutoSize = true;
+            this.cbUploadFtp.Location = new System.Drawing.Point(20, 115);
+            this.cbUploadFtp.Name = "cbUploadFtp";
+            this.cbUploadFtp.Size = new System.Drawing.Size(87, 17);
+            this.cbUploadFtp.TabIndex = 14;
+            this.cbUploadFtp.Text = "Upload to ftp";
+            this.cbUploadFtp.UseVisualStyleBackColor = true;
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.email);
@@ -285,6 +314,16 @@
             this.groupBox2.Size = new System.Drawing.Size(256, 116);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
+            // 
+            // email
+            // 
+            this.email.AutoSize = true;
+            this.email.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.email.Location = new System.Drawing.Point(3, 16);
+            this.email.Name = "email";
+            this.email.Size = new System.Drawing.Size(37, 13);
+            this.email.TabIndex = 6;
+            this.email.Text = "Email";
             // 
             // groupBox3
             // 
@@ -298,43 +337,6 @@
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
             // 
-            // cbUploadFtp
-            // 
-            this.cbUploadFtp.AutoSize = true;
-            this.cbUploadFtp.Location = new System.Drawing.Point(20, 115);
-            this.cbUploadFtp.Name = "cbUploadFtp";
-            this.cbUploadFtp.Size = new System.Drawing.Size(87, 17);
-            this.cbUploadFtp.TabIndex = 14;
-            this.cbUploadFtp.Text = "Upload to ftp";
-            this.cbUploadFtp.UseVisualStyleBackColor = true;
-            // 
-            // localDest
-            // 
-            this.localDest.AutoSize = true;
-            this.localDest.Location = new System.Drawing.Point(19, 47);
-            this.localDest.Name = "localDest";
-            this.localDest.Size = new System.Drawing.Size(90, 13);
-            this.localDest.TabIndex = 15;
-            this.localDest.Text = "Local destination:";
-            // 
-            // tbLocalDest
-            // 
-            this.tbLocalDest.Location = new System.Drawing.Point(20, 63);
-            this.tbLocalDest.Name = "tbLocalDest";
-            this.tbLocalDest.ReadOnly = true;
-            this.tbLocalDest.Size = new System.Drawing.Size(216, 20);
-            this.tbLocalDest.TabIndex = 16;
-            // 
-            // email
-            // 
-            this.email.AutoSize = true;
-            this.email.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.email.Location = new System.Drawing.Point(3, 16);
-            this.email.Name = "email";
-            this.email.Size = new System.Drawing.Size(37, 13);
-            this.email.TabIndex = 6;
-            this.email.Text = "Email";
-            // 
             // Scheduler
             // 
             this.Scheduler.AutoSize = true;
@@ -344,16 +346,6 @@
             this.Scheduler.Size = new System.Drawing.Size(64, 13);
             this.Scheduler.TabIndex = 10;
             this.Scheduler.Text = "Scheduler";
-            // 
-            // bChangeLocalDest
-            // 
-            this.bChangeLocalDest.Location = new System.Drawing.Point(161, 89);
-            this.bChangeLocalDest.Name = "bChangeLocalDest";
-            this.bChangeLocalDest.Size = new System.Drawing.Size(75, 23);
-            this.bChangeLocalDest.TabIndex = 17;
-            this.bChangeLocalDest.Text = "Change";
-            this.bChangeLocalDest.UseVisualStyleBackColor = true;
-            this.bChangeLocalDest.Click += new System.EventHandler(this.bChangeLocalDest_Click);
             // 
             // Form2
             // 
@@ -401,7 +393,6 @@
         private System.Windows.Forms.Label ScheduleLabel;
         private System.Windows.Forms.DateTimePicker ScheduleTime;
         private System.Windows.Forms.Button Runbutton;
-        private System.Windows.Forms.ToolStripMenuItem newConnectionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
