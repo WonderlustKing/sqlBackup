@@ -22,6 +22,7 @@ namespace BackUpDb
         SendEmail mail = null;
         private Form1 connectForm = null;
         private DownloadDb downloadDB;
+        private string local_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\sqlbackup\\";
         public Form2()
         {
             InitializeComponent();
@@ -30,8 +31,6 @@ namespace BackUpDb
         public Form2(Form callingForm)
         {
             connectForm = callingForm as Form1;
-            // change the databaseName with yours
-            downloadDB = new DownloadDb(connectForm.getHostname,connectForm.getUsername,connectForm.getPassword,"databaseName");
             InitializeComponent();
         }
         private void SchedulecheckBox_CheckedChanged(object sender, EventArgs e)
@@ -90,9 +89,9 @@ namespace BackUpDb
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            if (this.connectForm.getConnection)//elexnos an einai sundedemenos me to server prepei na mpei pantou sxedon
+            if (this.connectForm.getConnection)
             {
-
+                tbLocalDest.Text = local_path;
             }
             
         }
@@ -104,12 +103,32 @@ namespace BackUpDb
 
         private void getBackuplinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            //MessageBox.Show(local_path.ToString());
+           
+            // change the databaseName with yours
+            downloadDB = new DownloadDb(connectForm.getHostname, connectForm.getUsername, connectForm.getPassword, "theatrodb",local_path);
             //check the response of backupdb() method, if true successed, else failed
             Boolean flag = downloadDB.backupdb();
             if (flag) MessageBox.Show("Backup has successfully completed!");
             else MessageBox.Show("An error has occured, backup failed");
+            
         }
 
-       
+        public string LocalPath
+        {
+            get { return local_path; }
+            set { local_path = value; }
+        }
+
+        private void bChangeLocalDest_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog folderChoose = new FolderBrowserDialog();
+            DialogResult result = folderChoose.ShowDialog();
+            if(result == DialogResult.OK)
+            {
+                local_path = folderChoose.SelectedPath;
+                tbLocalDest.Text = folderChoose.SelectedPath;
+            }
+        }
     }
 }
