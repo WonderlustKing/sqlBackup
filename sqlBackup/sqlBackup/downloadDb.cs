@@ -18,18 +18,20 @@ namespace sqlBackup
         // mysqldump.exe path
         private string mysqldump= System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)+"\\mysqldump";
         // user application path for sqlbackup(where everything will be saved here)
-        private string user_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)+"\\sqlbackup\\";
+        //private string user_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)+"\\sqlbackup\\";
+        private string user_path;
 
         public DownloadDb()
         {
 
         }
-        public DownloadDb(string hostname,string username,string password, string dbname)
+        public DownloadDb(string hostname,string username,string password, string dbname, string user_path)
         {
             this.hostname = hostname;
             this.password = password;
             this.username = username;
             this.dbname = dbname;
+            this.user_path = user_path;
         }
 
         // backup a database
@@ -57,7 +59,7 @@ namespace sqlBackup
                 check_app_path.Directory.Create();
 
                 // name of subfolder for this backup
-                string backup_subfolder = user_path + day + "-" + month + "-" + year + "-" + hour +"_"+ minute+"\\";
+                string backup_subfolder = user_path+ "\\" + "SqlBackup_"+ day + "-" + month + "-" + year + "-" + hour +"_"+ minute+"\\";
                 
                 // check if subfolder directory exists, if not create it
                 System.IO.FileInfo create_subfolder = new System.IO.FileInfo(backup_subfolder);
