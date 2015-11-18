@@ -52,14 +52,14 @@
             this.selectDestLabel = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.cbUploadFtp = new System.Windows.Forms.CheckBox();
-            this.localDest = new System.Windows.Forms.Label();
-            this.tbLocalDest = new System.Windows.Forms.TextBox();
-            this.email = new System.Windows.Forms.Label();
-            this.Scheduler = new System.Windows.Forms.Label();
             this.bChangeLocalDest = new System.Windows.Forms.Button();
+            this.tbLocalDest = new System.Windows.Forms.TextBox();
+            this.localDest = new System.Windows.Forms.Label();
+            this.cbUploadFtp = new System.Windows.Forms.CheckBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.email = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.Scheduler = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -125,7 +125,7 @@
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.logFileToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.toolsToolStripMenuItem.Text = "&Tools";
             // 
             // logFileToolStripMenuItem
@@ -154,7 +154,7 @@
             // 
             this.treeView1.Location = new System.Drawing.Point(12, 142);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(178, 190);
+            this.treeView1.Size = new System.Drawing.Size(178, 302);
             this.treeView1.TabIndex = 2;
             // 
             // emailnotcheckBox
@@ -232,7 +232,7 @@
             // getBackuplinkLabel
             // 
             this.getBackuplinkLabel.AutoSize = true;
-            this.getBackuplinkLabel.Location = new System.Drawing.Point(13, 344);
+            this.getBackuplinkLabel.Location = new System.Drawing.Point(9, 461);
             this.getBackuplinkLabel.Name = "getBackuplinkLabel";
             this.getBackuplinkLabel.Size = new System.Drawing.Size(86, 13);
             this.getBackuplinkLabel.TabIndex = 11;
@@ -262,6 +262,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.AutoSize = true;
             this.groupBox1.Controls.Add(this.bChangeLocalDest);
             this.groupBox1.Controls.Add(this.tbLocalDest);
             this.groupBox1.Controls.Add(this.localDest);
@@ -270,9 +271,46 @@
             this.groupBox1.Controls.Add(this.linkLabel1);
             this.groupBox1.Location = new System.Drawing.Point(242, 39);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(256, 169);
+            this.groupBox1.Size = new System.Drawing.Size(256, 173);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
+            // 
+            // bChangeLocalDest
+            // 
+            this.bChangeLocalDest.Location = new System.Drawing.Point(161, 89);
+            this.bChangeLocalDest.Name = "bChangeLocalDest";
+            this.bChangeLocalDest.Size = new System.Drawing.Size(75, 23);
+            this.bChangeLocalDest.TabIndex = 17;
+            this.bChangeLocalDest.Text = "Change";
+            this.bChangeLocalDest.UseVisualStyleBackColor = true;
+            this.bChangeLocalDest.Click += new System.EventHandler(this.bChangeLocalDest_Click);
+            // 
+            // tbLocalDest
+            // 
+            this.tbLocalDest.Location = new System.Drawing.Point(20, 63);
+            this.tbLocalDest.Name = "tbLocalDest";
+            this.tbLocalDest.ReadOnly = true;
+            this.tbLocalDest.Size = new System.Drawing.Size(216, 20);
+            this.tbLocalDest.TabIndex = 16;
+            // 
+            // localDest
+            // 
+            this.localDest.AutoSize = true;
+            this.localDest.Location = new System.Drawing.Point(19, 47);
+            this.localDest.Name = "localDest";
+            this.localDest.Size = new System.Drawing.Size(90, 13);
+            this.localDest.TabIndex = 15;
+            this.localDest.Text = "Local destination:";
+            // 
+            // cbUploadFtp
+            // 
+            this.cbUploadFtp.AutoSize = true;
+            this.cbUploadFtp.Location = new System.Drawing.Point(20, 115);
+            this.cbUploadFtp.Name = "cbUploadFtp";
+            this.cbUploadFtp.Size = new System.Drawing.Size(87, 17);
+            this.cbUploadFtp.TabIndex = 14;
+            this.cbUploadFtp.Text = "Upload to ftp";
+            this.cbUploadFtp.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -286,6 +324,16 @@
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             // 
+            // email
+            // 
+            this.email.AutoSize = true;
+            this.email.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.email.Location = new System.Drawing.Point(3, 16);
+            this.email.Name = "email";
+            this.email.Size = new System.Drawing.Size(37, 13);
+            this.email.TabIndex = 6;
+            this.email.Text = "Email";
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.Scheduler);
@@ -298,43 +346,6 @@
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
             // 
-            // cbUploadFtp
-            // 
-            this.cbUploadFtp.AutoSize = true;
-            this.cbUploadFtp.Location = new System.Drawing.Point(20, 115);
-            this.cbUploadFtp.Name = "cbUploadFtp";
-            this.cbUploadFtp.Size = new System.Drawing.Size(87, 17);
-            this.cbUploadFtp.TabIndex = 14;
-            this.cbUploadFtp.Text = "Upload to ftp";
-            this.cbUploadFtp.UseVisualStyleBackColor = true;
-            // 
-            // localDest
-            // 
-            this.localDest.AutoSize = true;
-            this.localDest.Location = new System.Drawing.Point(19, 47);
-            this.localDest.Name = "localDest";
-            this.localDest.Size = new System.Drawing.Size(90, 13);
-            this.localDest.TabIndex = 15;
-            this.localDest.Text = "Local destination:";
-            // 
-            // tbLocalDest
-            // 
-            this.tbLocalDest.Location = new System.Drawing.Point(20, 63);
-            this.tbLocalDest.Name = "tbLocalDest";
-            this.tbLocalDest.ReadOnly = true;
-            this.tbLocalDest.Size = new System.Drawing.Size(216, 20);
-            this.tbLocalDest.TabIndex = 16;
-            // 
-            // email
-            // 
-            this.email.AutoSize = true;
-            this.email.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.email.Location = new System.Drawing.Point(3, 16);
-            this.email.Name = "email";
-            this.email.Size = new System.Drawing.Size(37, 13);
-            this.email.TabIndex = 6;
-            this.email.Text = "Email";
-            // 
             // Scheduler
             // 
             this.Scheduler.AutoSize = true;
@@ -344,16 +355,6 @@
             this.Scheduler.Size = new System.Drawing.Size(64, 13);
             this.Scheduler.TabIndex = 10;
             this.Scheduler.Text = "Scheduler";
-            // 
-            // bChangeLocalDest
-            // 
-            this.bChangeLocalDest.Location = new System.Drawing.Point(161, 89);
-            this.bChangeLocalDest.Name = "bChangeLocalDest";
-            this.bChangeLocalDest.Size = new System.Drawing.Size(75, 23);
-            this.bChangeLocalDest.TabIndex = 17;
-            this.bChangeLocalDest.Text = "Change";
-            this.bChangeLocalDest.UseVisualStyleBackColor = true;
-            this.bChangeLocalDest.Click += new System.EventHandler(this.bChangeLocalDest_Click);
             // 
             // Form2
             // 
