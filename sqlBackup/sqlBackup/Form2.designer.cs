@@ -91,24 +91,24 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.saveAsToolStripMenuItem.Text = "Save As...";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(120, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -134,7 +134,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 90);
+            this.button1.Location = new System.Drawing.Point(11, 50);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(179, 23);
             this.button1.TabIndex = 1;
@@ -144,9 +144,9 @@
             // 
             // treeView1
             // 
-            this.treeView1.Location = new System.Drawing.Point(12, 142);
+            this.treeView1.Location = new System.Drawing.Point(12, 86);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(178, 190);
+            this.treeView1.Size = new System.Drawing.Size(178, 358);
             this.treeView1.TabIndex = 2;
             // 
             // emailnotcheckBox
@@ -224,7 +224,7 @@
             // getBackuplinkLabel
             // 
             this.getBackuplinkLabel.AutoSize = true;
-            this.getBackuplinkLabel.Location = new System.Drawing.Point(13, 344);
+            this.getBackuplinkLabel.Location = new System.Drawing.Point(9, 461);
             this.getBackuplinkLabel.Name = "getBackuplinkLabel";
             this.getBackuplinkLabel.Size = new System.Drawing.Size(86, 13);
             this.getBackuplinkLabel.TabIndex = 11;
