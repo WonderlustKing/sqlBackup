@@ -13,6 +13,8 @@ using System.Net.Mail;
 using System.IO;
 using System.Diagnostics;
 using sqlBackup;
+using System.Data.OleDb;
+using MySql.Data.MySqlClient;
 
 namespace BackUpDb
 {
@@ -82,9 +84,44 @@ namespace BackUpDb
             
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        // Emfanizei ths baseis pou prokeitai na epilexthoun
+        private void ShowDatabasesbutton_Click(object sender, EventArgs e)
         {
 
+            if (this.connectForm.getConnection)
+            {
+
+                DataTable dt = new DataTable();
+                // Connection string me ta pedia pou edwse o xrhsths 
+                String conn = "server=" + connectForm.getHostname +
+                    ";user=" + connectForm.getUsername + ";pwd=" + connectForm.getPassword + ";";
+
+                try
+                {
+
+                    MySqlConnection mysqlconn = new MySqlConnection(conn);
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.Connection = mysqlconn;
+                    mysqlconn.Open();
+                    // query gia na emfanisei ths baseis
+                    cmd.CommandText = "show databases;";
+                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                    da.Fill(dt);
+
+                } catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+                DatabasesCheckedListBox.Visible = true;
+                foreach (DataRow row in dt.Rows)
+                {
+                    DatabasesCheckedListBox.Items.Add(row[0]);
+                }
+
+            }
+
+            ShowDatabasesbutton.Enabled = false;
         }
 
         private void Form2_Load(object sender, EventArgs e)
