@@ -38,8 +38,7 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.ShowDatabasesbutton = new System.Windows.Forms.Button();
             this.emailnotcheckBox = new System.Windows.Forms.CheckBox();
             this.emailLabel = new System.Windows.Forms.Label();
             this.emailtextBox = new System.Windows.Forms.TextBox();
@@ -59,6 +58,7 @@
             this.email = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.Scheduler = new System.Windows.Forms.Label();
+            this.DatabasesCheckedListBox = new System.Windows.Forms.CheckedListBox();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -132,22 +132,15 @@
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
-            // button1
+            // ShowDatabasesbutton
             // 
-            this.button1.Location = new System.Drawing.Point(11, 50);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(179, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Show Databases";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // treeView1
-            // 
-            this.treeView1.Location = new System.Drawing.Point(12, 86);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(178, 358);
-            this.treeView1.TabIndex = 2;
+            this.ShowDatabasesbutton.Location = new System.Drawing.Point(11, 50);
+            this.ShowDatabasesbutton.Name = "ShowDatabasesbutton";
+            this.ShowDatabasesbutton.Size = new System.Drawing.Size(179, 23);
+            this.ShowDatabasesbutton.TabIndex = 1;
+            this.ShowDatabasesbutton.Text = "Show Databases";
+            this.ShowDatabasesbutton.UseVisualStyleBackColor = true;
+            this.ShowDatabasesbutton.Click += new System.EventHandler(this.ShowDatabasesbutton_Click);
             // 
             // emailnotcheckBox
             // 
@@ -347,19 +340,27 @@
             this.Scheduler.TabIndex = 10;
             this.Scheduler.Text = "Scheduler";
             // 
+            // DatabasesCheckedListBox
+            // 
+            this.DatabasesCheckedListBox.FormattingEnabled = true;
+            this.DatabasesCheckedListBox.Location = new System.Drawing.Point(12, 102);
+            this.DatabasesCheckedListBox.Name = "DatabasesCheckedListBox";
+            this.DatabasesCheckedListBox.Size = new System.Drawing.Size(178, 334);
+            this.DatabasesCheckedListBox.TabIndex = 17;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(520, 505);
+            this.Controls.Add(this.DatabasesCheckedListBox);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.Runbutton);
             this.Controls.Add(this.getBackuplinkLabel);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.ShowDatabasesbutton);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.treeView1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form2";
@@ -384,8 +385,7 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.Button ShowDatabasesbutton;
         private System.Windows.Forms.CheckBox emailnotcheckBox;
         private System.Windows.Forms.Label emailLabel;
         private System.Windows.Forms.TextBox emailtextBox;
@@ -410,5 +410,6 @@
         private System.Windows.Forms.CheckBox cbUploadFtp;
         private System.Windows.Forms.Label email;
         private System.Windows.Forms.Label Scheduler;
+        private System.Windows.Forms.CheckedListBox DatabasesCheckedListBox;
     }
 }
