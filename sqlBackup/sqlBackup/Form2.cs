@@ -141,13 +141,27 @@ namespace BackUpDb
         private void getBackuplinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             //MessageBox.Show(local_path.ToString());
+            
+            // get number of selected databases from checklistBox
+            int selectedDbNum = DatabasesCheckedListBox.CheckedItems.Count;
+
+            //array with selected databases number length, for store all selected databases
+            string[] dbForBackup = new string[selectedDbNum];
+            //get names of selected databases
+            int i = 0;
+            foreach (object itemChecked in DatabasesCheckedListBox.CheckedItems)
+            {
+                dbForBackup[i] = itemChecked.ToString();
+                i++;
+            }
            
             // change the databaseName with yours
-            downloadDB = new DownloadDb(connectForm.getHostname, connectForm.getUsername, connectForm.getPassword, "theatrodb",local_path);
+            downloadDB = new DownloadDb(connectForm.getHostname, connectForm.getUsername, connectForm.getPassword, dbForBackup, local_path);
+            
             //check the response of backupdb() method, if true successed, else failed
-            Boolean flag = downloadDB.backupdb();
-            if (flag) MessageBox.Show("Backup has successfully completed!");
-            else MessageBox.Show("An error has occured, backup failed");
+            string response = downloadDB.backupdb();
+            MessageBox.Show(response);
+           
             
         }
 
