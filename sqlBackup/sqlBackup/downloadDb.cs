@@ -17,10 +17,8 @@ namespace sqlBackup
         private string[] dbname;
         private int numsOfDatabases;
         // mysqldump.exe path
-        //private string mysqldump= System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)+"\\mysqldump";
         private string mysqldump = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName+"\\mysqldump";
         // user application path for sqlbackup(where everything will be saved here)
-        //private string user_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)+"\\sqlbackup\\";
         private string user_path;
 
         public DownloadDb()
