@@ -38,7 +38,6 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ShowDatabasesbutton = new System.Windows.Forms.Button();
             this.emailnotcheckBox = new System.Windows.Forms.CheckBox();
             this.emailLabel = new System.Windows.Forms.Label();
             this.emailtextBox = new System.Windows.Forms.TextBox();
@@ -131,16 +130,6 @@
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "&Help";
-            // 
-            // ShowDatabasesbutton
-            // 
-            this.ShowDatabasesbutton.Location = new System.Drawing.Point(11, 50);
-            this.ShowDatabasesbutton.Name = "ShowDatabasesbutton";
-            this.ShowDatabasesbutton.Size = new System.Drawing.Size(179, 23);
-            this.ShowDatabasesbutton.TabIndex = 1;
-            this.ShowDatabasesbutton.Text = "Show Databases";
-            this.ShowDatabasesbutton.UseVisualStyleBackColor = true;
-            this.ShowDatabasesbutton.Click += new System.EventHandler(this.ShowDatabasesbutton_Click);
             // 
             // emailnotcheckBox
             // 
@@ -343,9 +332,9 @@
             // DatabasesCheckedListBox
             // 
             this.DatabasesCheckedListBox.FormattingEnabled = true;
-            this.DatabasesCheckedListBox.Location = new System.Drawing.Point(12, 102);
+            this.DatabasesCheckedListBox.Location = new System.Drawing.Point(12, 72);
             this.DatabasesCheckedListBox.Name = "DatabasesCheckedListBox";
-            this.DatabasesCheckedListBox.Size = new System.Drawing.Size(178, 334);
+            this.DatabasesCheckedListBox.Size = new System.Drawing.Size(178, 364);
             this.DatabasesCheckedListBox.TabIndex = 17;
             // 
             // Form2
@@ -359,7 +348,6 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.Runbutton);
             this.Controls.Add(this.getBackuplinkLabel);
-            this.Controls.Add(this.ShowDatabasesbutton);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
@@ -385,7 +373,6 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.Button ShowDatabasesbutton;
         private System.Windows.Forms.CheckBox emailnotcheckBox;
         private System.Windows.Forms.Label emailLabel;
         private System.Windows.Forms.TextBox emailtextBox;
