@@ -96,12 +96,19 @@ namespace BackUpDb
             if ((this.connectForm.getConnection)||(this.connectForm.getConnection2))
             {
                 tbLocalDest.Text = local_path;
-
+                String conn = null;
                 DataTable dt = new DataTable();
                 // Connection string me ta pedia pou edwse o xrhsths 
-                String conn = "server=" + connectForm.getHostname +
-                    ";user=" + connectForm.getUsername + ";pwd=" + connectForm.getPassword + ";";
-
+                if ((this.connectForm.getConnection))
+                {
+                     conn = "server=" + connectForm.getHostname +
+                        ";user=" + connectForm.getUsername + ";pwd=" + connectForm.getPassword + ";";
+                }
+                else if((this.connectForm.getConnection2))
+                {
+                    conn = "server=" + connectForm.getHostname2 +
+                       ";user=" + connectForm.getUsername2 + ";pwd=" + connectForm.getPassword2 + ";";
+                }
                 try
                 {
 

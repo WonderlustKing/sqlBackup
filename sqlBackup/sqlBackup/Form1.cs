@@ -120,5 +120,17 @@ namespace BackUpDb
         {
             get { return loadfile.Connected(); }
         }
+        public string getHostname2
+        {
+            get { return loadfile.getHostname(); }
+        }
+        public string getUsername2
+        {
+            get { return loadfile.getUsername(); }
+        }
+        public string getPassword2
+        {
+            get { return loadfile.getPassword(); }
+        }
     }
 }
