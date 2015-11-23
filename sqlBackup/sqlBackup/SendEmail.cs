@@ -18,9 +18,11 @@ namespace BackUpDb
     {
         SmtpClient client = new SmtpClient("smtp.mail.yahoo.com", 587);
         private String whereisgoes = null;
-        public SendEmail(String whereitgoes)
+        private String response = null;
+        public SendEmail(String whereitgoes,String response)
         {
             this.whereisgoes = whereitgoes;
+            this.response = response;
         }
         public void PrepareEmail()
         {
@@ -38,7 +40,7 @@ namespace BackUpDb
         }
         public void setEmail()
         {
-            client.Send("backupforyou@yahoo.com", this.whereisgoes, "BackUpDB", "BackUp");
+            client.Send("backupforyou@yahoo.com", this.whereisgoes, "About Your Last Back Up Action",this.response);
         }
         
     }
