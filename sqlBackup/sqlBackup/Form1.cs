@@ -18,8 +18,6 @@ namespace BackUpDb
         TcpClient tcpclnt = new TcpClient();
         private void connectButton_Click(object sender, EventArgs e)
         { 
-            
-
                 connectstring = new StringBuilder();
                 if ((hostnametextbox.Text != "") && (porttextbox.Text != ""))
                 {//prepei na dwsei hostname
