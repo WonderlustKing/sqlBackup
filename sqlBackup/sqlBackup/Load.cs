@@ -82,15 +82,14 @@ namespace BackUpDb
             {
                 MessageBox.Show(ex.Message);
             }
-            if (tcpclnt.Connected)
-            {
-                Form2 forma2 = new Form2();
-                forma2.Visible = true;
-            }
         }
         public Boolean Connected()
         {
             return tcpclnt.Connected;
+        }
+        public bool getConnection//stelnei sthn forma 2 an to connection me ton server exei ginei
+        {
+            get { return tcpclnt.Connected; }
         }
     }
  }

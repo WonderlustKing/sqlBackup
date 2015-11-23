@@ -94,13 +94,17 @@ namespace BackUpDb
                 SaveCheckBox.Checked = false;
             }
         }
+        Load loadfile =  new Load();
         //otan o xrhsths thelei na fortosei ena save pou exei kanei
         private void LoadButton_Click(object sender, EventArgs e)
         {
-            Load loadfile = new Load();
+            //Load loadfile = new Load();
             loadfile.LoadFromFile();
+
             if (loadfile.Connected())
             {
+                Form2 forma2 = new Form2(this);
+                forma2.Visible = true;
                 this.Visible = false;
             }
          }
@@ -120,6 +124,9 @@ namespace BackUpDb
         {
             get { return passwordtextbox.Text; }
         }
-        
+        public bool getConnection2
+        {
+            get { return loadfile.getConnection; }
+        }
     }
 }

@@ -18,7 +18,7 @@ using MySql.Data.MySqlClient;
 
 namespace BackUpDb
 {
-    public partial class Form2 : Form
+    public partial class Form2 : Form 
     {
         Form3 form3 = new Form3();
         SendEmail mail = null;
@@ -32,10 +32,11 @@ namespace BackUpDb
         Boolean success = false;
         String response = null;
         public Form2(Form callingForm)
-        {
+        {        
             connectForm = callingForm as Form1;
             InitializeComponent();
         }
+        
         private void SchedulecheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (SchedulecheckBox.Checked)
@@ -54,7 +55,7 @@ namespace BackUpDb
         {
             if (emailnotcheckBox.Checked)
             {
-                if (this.connectForm.getConnection)//elexnos an einai sundedemenos me to server prepei na mpei pantou sxedon
+                if ((this.connectForm.getConnection) || this.connectForm.getConnection2)//elexnos an einai sundedemenos me to server prepei na mpei pantou sxedon
                 {
                    
                         emailLabel.Enabled = true;
@@ -70,7 +71,7 @@ namespace BackUpDb
 
         private void Runbutton_Click(object sender, EventArgs e)
         {
-            if ((this.connectForm.getConnection) && (success))
+            if ((((this.connectForm.getConnection) || this.connectForm.getConnection2)) && (success))
             {
                 if (emailnotcheckBox.Checked)
                 {
@@ -92,7 +93,8 @@ namespace BackUpDb
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            if (this.connectForm.getConnection)
+            
+            if ((this.connectForm.getConnection)|| this.connectForm.getConnection2)
             {
                 tbLocalDest.Text = local_path;
 
