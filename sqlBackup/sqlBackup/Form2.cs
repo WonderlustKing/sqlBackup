@@ -84,12 +84,12 @@ namespace BackUpDb
             
         }
 
-        // Emfanizei ths baseis pou prokeitai na epilexthoun
-        private void ShowDatabasesbutton_Click(object sender, EventArgs e)
-        {
 
+        private void Form2_Load(object sender, EventArgs e)
+        {
             if (this.connectForm.getConnection)
             {
+                tbLocalDest.Text = local_path;
 
                 DataTable dt = new DataTable();
                 // Connection string me ta pedia pou edwse o xrhsths 
@@ -108,7 +108,8 @@ namespace BackUpDb
                     MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                     da.Fill(dt);
 
-                } catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
@@ -118,17 +119,6 @@ namespace BackUpDb
                 {
                     DatabasesCheckedListBox.Items.Add(row[0]);
                 }
-
-            }
-
-            ShowDatabasesbutton.Enabled = false;
-        }
-
-        private void Form2_Load(object sender, EventArgs e)
-        {
-            if (this.connectForm.getConnection)
-            {
-                tbLocalDest.Text = local_path;
             }
             
         }
