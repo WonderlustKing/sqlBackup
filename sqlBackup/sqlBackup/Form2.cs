@@ -29,7 +29,8 @@ namespace BackUpDb
         {
             InitializeComponent();
         }
-            
+        Boolean success = false;
+        String response = null;
         public Form2(Form callingForm)
         {
             connectForm = callingForm as Form1;
@@ -69,12 +70,16 @@ namespace BackUpDb
 
         private void Runbutton_Click(object sender, EventArgs e)
         {
-            if (this.connectForm.getConnection)
+            if ((this.connectForm.getConnection) && (success))
             {
+                if (emailnotcheckBox.Checked)
+                {
+                    mail = new SendEmail(emailtextBox.Text,response);
+                    mail.PrepareEmail();
+                    mail.setEmail();
+                    
+                }
                 form3.Visible = true;
-               // mail = new SendEmail(emailtextBox.Text);
-               // mail.PrepareEmail();
-               // mail.setEmail();
             }
         }
 
@@ -149,10 +154,14 @@ namespace BackUpDb
             downloadDB = new DownloadDb(connectForm.getHostname, connectForm.getUsername, connectForm.getPassword, dbForBackup, local_path);
             
             //check the response of backupdb() method, if true successed, else failed
-            string response = downloadDB.backupdb();
+            response = downloadDB.backupdb();
             MessageBox.Show(response);
-           
             
+            if (response.Equals("Backup completed successfully!"))
+            {
+                success = true;
+                Console.WriteLine(success);
+            }            
         }
 
         public string LocalPath
