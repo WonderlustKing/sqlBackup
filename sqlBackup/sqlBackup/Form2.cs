@@ -92,6 +92,7 @@ namespace BackUpDb
 
         private void Form2_Load(object sender, EventArgs e)
         {
+            
             if (this.connectForm.getConnection)
             {
                 tbLocalDest.Text = local_path;

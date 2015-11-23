@@ -13,42 +13,38 @@ namespace BackUpDb
         {
             InitializeComponent();
         }
-        
         StringBuilder connectstring;
         ConnectToServer conser = new ConnectToServer();
         TcpClient tcpclnt = new TcpClient();
         private void connectButton_Click(object sender, EventArgs e)
         { 
             
-            {
+
                 connectstring = new StringBuilder();
-                if (hostnametextbox.Text != "")
+                if ((hostnametextbox.Text != "") && (porttextbox.Text != ""))
                 {//prepei na dwsei hostname
+                   
                     conser.setHostname(hostnametextbox.Text, porttextbox.Text);
-                }
-                else
-                {
-                    MessageBox.Show("Insert Hostname to Continue");//msgbox an den dwsei host
+
                 }
                 if (usernametextbox.Text != "")
                 {//prepei na dwsei username 
+                    
                     conser.setUsername(usernametextbox.Text);
+
                 }
-                else
-                {
-                    MessageBox.Show("Insert username to Continue");//msgbox an den dwsei username
-                }
-                if (passwordtextbox.Text != "")
+            if (passwordtextbox.Text != "")
                 {// prepei na dwsei pass
                     conser.setPassword(passwordtextbox.Text);
-                }                     
-            }
+                }
+            
             try
             {
                 tcpclnt.Connect(conser.getHostname(), Convert.ToInt32(conser.getPort()));
             }
             catch (Exception ex)
             {
+               
                 MessageBox.Show(ex.Message);
             }
             if (tcpclnt.Connected) {
@@ -60,7 +56,6 @@ namespace BackUpDb
             {
                 porttextbox.Text = "3306";
                 hostnametextbox.Text = null;
-                porttextbox.Text = null;
                 usernametextbox.Text = null;
                 passwordtextbox.Text = null;
             }
