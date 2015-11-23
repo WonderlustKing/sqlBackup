@@ -82,11 +82,6 @@ namespace BackUpDb
             {
                 MessageBox.Show(ex.Message);
             }
-            if (tcpclnt.Connected)
-            {
-                Form2 forma2 = new Form2();
-                forma2.Visible = true;
-            }
         }
         public Boolean Connected()
         {
