@@ -92,12 +92,8 @@ namespace BackUpDb
 
         private void Form2_Load(object sender, EventArgs e)
         {
-<<<<<<< HEAD
+
             if ((this.connectForm.getConnection)||(this.connectForm.getConnection2))
-=======
-            
-            if (this.connectForm.getConnection)
->>>>>>> origin/master
             {
                 tbLocalDest.Text = local_path;
 
