@@ -67,17 +67,20 @@ namespace BackUpDb
         TcpClient tcpclnt = new TcpClient();
         public void LoadFromFile()
         {
-           
-            OpenFileDialog openfile = new OpenFileDialog();
-            openfile.ShowDialog();
-            String filename = openfile.FileName;
-            StreamReader readfromLoad = new StreamReader(filename);
-            ConnectToServer connection = new ConnectToServer();
-            connection.setHostname(readfromLoad.ReadLine(), readfromLoad.ReadLine());
-            connection.setUsername(readfromLoad.ReadLine());
-            connection.setPassword(readfromLoad.ReadLine());
-            try {
-                tcpclnt.Connect(connection.getHostname(), Convert.ToInt32(connection.getPort()));
+            try
+            {
+                OpenFileDialog openfile = new OpenFileDialog();
+                openfile.ShowDialog();
+                String filename = openfile.FileName;
+                StreamReader readfromLoad = new StreamReader(filename);
+                ConnectToServer connection = new ConnectToServer();
+                //connection.setHostname(readfromLoad.ReadLine(), readfromLoad.ReadLine());
+                //connection.setUsername(readfromLoad.ReadLine());
+                //connection.setPassword(readfromLoad.ReadLine());
+                setHostname(readfromLoad.ReadLine(), readfromLoad.ReadLine());
+                setUsername(readfromLoad.ReadLine());
+                setPassword(readfromLoad.ReadLine());
+                tcpclnt.Connect(this.hostname, Convert.ToInt32(this.port));
             }catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
