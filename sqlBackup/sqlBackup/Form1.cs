@@ -17,32 +17,32 @@ namespace BackUpDb
         ConnectToServer conser = new ConnectToServer();
         TcpClient tcpclnt = new TcpClient();
         private void connectButton_Click(object sender, EventArgs e)
-        { 
-                connectstring = new StringBuilder();
-                if ((hostnametextbox.Text != "") && (porttextbox.Text != ""))
-                {//prepei na dwsei hostname
-                   
-                    conser.setHostname(hostnametextbox.Text, porttextbox.Text);
+        {
+            connectstring = new StringBuilder();
+            if ((hostnametextbox.Text != "") && (porttextbox.Text != ""))
+            {//prepei na dwsei hostname
 
-                }
-                if (usernametextbox.Text != "")
-                {//prepei na dwsei username 
-                    
-                    conser.setUsername(usernametextbox.Text);
+                conser.setHostname(hostnametextbox.Text, porttextbox.Text);
 
-                }
+            }
+            if (usernametextbox.Text != "")
+            {//prepei na dwsei username 
+
+                conser.setUsername(usernametextbox.Text);
+
+            }
             if (passwordtextbox.Text != "")
-                {// prepei na dwsei pass
-                    conser.setPassword(passwordtextbox.Text);
-                }
-            
+            {// prepei na dwsei pass
+                conser.setPassword(passwordtextbox.Text);
+            }
+
             try
             {
                 tcpclnt.Connect(conser.getHostname(), Convert.ToInt32(conser.getPort()));
             }
             catch (Exception ex)
             {
-               
+
                 MessageBox.Show(ex.Message);
             }
             if (tcpclnt.Connected) {
@@ -60,15 +60,15 @@ namespace BackUpDb
         }
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            
-        Application.Exit();
+
+            Application.Exit();
         }
         //gia to Save otan to remember me einai pathmeno
         private void SaveCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            
+
             if (SaveCheckBox.Checked)
-            {               
+            {
                 Save save = new Save(hostnametextbox.Text, porttextbox.Text, usernametextbox.Text, passwordtextbox.Text);
                 save.SaveME();
                 if (save.Exist())
@@ -80,7 +80,7 @@ namespace BackUpDb
                 {
                     savedlabel.Text = "Saved To ->";
                     wheresaved.Text = save.PathToShow();
-                }              
+                }
             }
             else
             {
@@ -91,7 +91,7 @@ namespace BackUpDb
         //otan o xrhsths thelei na fortosei ena save pou exei kanei
         private void LoadButton_Click(object sender, EventArgs e)
         {
-           
+
             loadfile.LoadFromFile();
             if (loadfile.Connected())
             {
@@ -99,7 +99,7 @@ namespace BackUpDb
                 forma2.Visible = true;
                 this.Visible = false;
             }
-         }
+        }
         public bool getConnection//stelnei sthn forma 2 an to connection me ton server exei ginei
         {
             get { return tcpclnt.Connected; }
@@ -116,8 +116,7 @@ namespace BackUpDb
         {
             get { return passwordtextbox.Text; }
         }
-        public bool getConnection2//stelnei sthn forma 2 an to connection me ton server exei ginei
-        {
+        public bool getConnection2 {//stelnei sthn forma2 ta stoixeia tou xrhsth otan kanei connect apo to Load
             get { return loadfile.Connected(); }
         }
         public string getHostname2
@@ -131,6 +130,11 @@ namespace BackUpDb
         public string getPassword2
         {
             get { return loadfile.getPassword(); }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
