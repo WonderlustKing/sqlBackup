@@ -16,6 +16,8 @@ namespace sqlBackup
         private string password;
         private string[] dbname;
         private int numsOfDatabases;
+        private String date = null;
+        private String time = null;
         // mysqldump.exe path
         private string mysqldump = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName+"\\mysqldump";
         // user application path for sqlbackup(where everything will be saved here)
@@ -57,7 +59,8 @@ namespace sqlBackup
 
                     int ms = backupTime.Millisecond;
                     String tmestr = backupTime.ToString();
-
+                    date = Convert.ToString(day)+"/"+ Convert.ToString(month) + "/" + Convert.ToString(year) ;
+                    time = Convert.ToString(hour) + ":" + Convert.ToString(minute) + ":" + Convert.ToString(second);
                     // check if sqlBackup directory exist in user application path, if not create it
                     System.IO.FileInfo check_app_path = new System.IO.FileInfo(user_path);
                     check_app_path.Directory.Create();
@@ -119,7 +122,24 @@ namespace sqlBackup
         {
             return mysqldump;
         }
-    
+        public string getDate
+        {
+            get
+            {
+                return date;
+            }
+        }
+        public string getTime
+        {
+            get
+            {
+                return time;
+            }
+        }
+        public string[] getDbBackedUp
+        {
+            get { return dbname; }
+        }
     }
     
 }

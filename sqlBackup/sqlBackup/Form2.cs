@@ -20,7 +20,7 @@ namespace BackUpDb
 {
     public partial class Form2 : Form
     {
-        Form3 form3 = new Form3();
+        Form3 form3 = null;
         SendEmail mail = null;
         private Form1 connectForm = null;
         private DownloadDb downloadDB;
@@ -79,6 +79,7 @@ namespace BackUpDb
                     mail.setEmail();
                     
                 }
+                form3 = new Form3(this);
                 form3.Visible = true;
             }
         }
@@ -187,6 +188,51 @@ namespace BackUpDb
                 local_path = folderChoose.SelectedPath;
                 tbLocalDest.Text = folderChoose.SelectedPath;
             }
+        }
+        public bool getConnection//stelnei sthn forma 2 an to connection me ton server exei ginei
+        {
+            get { return connectForm.getConnection; }
+        }
+        public string getHostname
+        {
+            get { return connectForm.getHostname; }
+        }
+        public string getUsername
+        {
+            get { return connectForm.getUsername; }
+        }
+        public string getPassword
+        {
+            get { return connectForm.getPassword; }
+        }
+        public bool getConnection2
+        {//stelnei sthn forma2 ta stoixeia tou xrhsth otan kanei connect apo to Load
+            get { return connectForm.getConnection2; }
+        }
+        public string getHostname2
+        {
+            get { return connectForm.getHostname2; }
+        }
+        public string getUsername2
+        {
+            get { return connectForm.getUsername2; }
+        }
+        public string getPassword2
+        {
+            get { return connectForm.getPassword2; }
+        }
+        //gia tis baseis kai einai geniko 
+        public string getTime
+        {
+            get { return downloadDB.getTime; }
+        }
+        public string getDate
+        {
+            get { return downloadDB.getDate; }
+        }
+        public string[] getDBBackedUp
+        {
+            get { return downloadDB.getDbBackedUp; }
         }
     }
 }
