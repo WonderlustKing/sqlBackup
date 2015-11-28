@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Diagnostics;
 using System.Reflection;
+using Ionic.Zip;
 
 namespace sqlBackup
 {
@@ -106,13 +107,22 @@ namespace sqlBackup
                         file.Close();
                     }
 
+                            using (ZipFile zip = new ZipFile())
+                            {
+                                zip.UseUnicodeAsNecessary = true;
+                                zip.AddDirectory(backup_subfolder);
+                                zip.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
+                                zip.Comment = "This zip was created at " + System.DateTime.Now.ToString("G");
+                                zip.Save(backup_subfolder+"\\sqlBackup"+ day + "-" + month + "-" + year + "-" + hour + "_" + minute + ".zip");
+                            }
 
                     return "Backup completed successfully!";
 
                 }
                 catch (IOException e)
                 {
-                    return "Backup failed, an IO error has occured";
+                    //return "Backup failed, an IO error has occured";
+                    return e.Message.ToString();
                 }
             }
             else return "Please first select database(s) for backup";
