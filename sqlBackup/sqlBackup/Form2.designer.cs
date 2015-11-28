@@ -116,7 +116,7 @@
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.logFileToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.toolsToolStripMenuItem.Text = "&Tools";
             // 
             // logFileToolStripMenuItem
@@ -332,6 +332,7 @@
             // 
             // DatabasesCheckedListBox
             // 
+            this.DatabasesCheckedListBox.CheckOnClick = true;
             this.DatabasesCheckedListBox.FormattingEnabled = true;
             this.DatabasesCheckedListBox.Location = new System.Drawing.Point(12, 72);
             this.DatabasesCheckedListBox.Name = "DatabasesCheckedListBox";
