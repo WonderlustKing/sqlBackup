@@ -24,6 +24,10 @@ namespace BackUpDb
         SendEmail mail = null;
         private Form1 connectForm = null;
         private DownloadDb downloadDB;
+        private FtpFormOptions ftpOptions;
+        private string ftpHost;
+        private string ftpUsername;
+        private string ftpPassword;
         private string local_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\sqlbackup\\";
         public Form2()
         {
@@ -233,6 +237,38 @@ namespace BackUpDb
         public string[] getDBBackedUp
         {
             get { return downloadDB.getDbBackedUp; }
+        }
+
+        public string FTPHost
+        {
+            get { return ftpHost; }
+            set { ftpHost = value; }
+        }
+
+        public string FTPusername
+        {
+            get { return ftpUsername; }
+            set { ftpUsername = value; }
+        }
+        public string FTPpasswd
+        {
+            get { return ftpPassword; }
+            set { ftpPassword = value; }
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if(ftpOptions == null)
+            {
+                ftpOptions = new FtpFormOptions(this);
+                ftpOptions.Visible = true;
+            }
+            else
+            {
+                ftpOptions = new FtpFormOptions(this,ftpHost,ftpUsername,ftpPassword);
+                ftpOptions.Visible = true;
+            }
+            
         }
     }
 }
