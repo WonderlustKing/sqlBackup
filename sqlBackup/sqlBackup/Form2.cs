@@ -32,13 +32,17 @@ namespace BackUpDb
         public Form2()
         {
             InitializeComponent();
+
+            
         }
         Boolean success = false;
         String response = null;
         public Form2(Form callingForm)
         {
+            
             connectForm = callingForm as Form1;
             InitializeComponent();
+            this.FormClosing += Form1_FormClosing;
         }
         private void SchedulecheckBox_CheckedChanged(object sender, EventArgs e)
         {
@@ -269,6 +273,20 @@ namespace BackUpDb
                 ftpOptions.Visible = true;
             }
             
+        }
+
+        private void Form1_FormClosing(Object sender, FormClosingEventArgs e)
+        {
+            
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                Console.WriteLine(this.DialogResult);
+                if (this.DialogResult == DialogResult.None)
+                {
+                    
+                    Application.Exit();
+                }
+            }
         }
     }
 }
