@@ -34,7 +34,7 @@ namespace BackUpDb
                     if ((i % 2 == 0) && (i != 0))
                     {
                         flag = true;
-                        databases.Append( "\n" + "                              " + connectform2.getDBBackedUp[i]);
+                        databases.Append( "\n" + "                        " + connectform2.getDBBackedUp[i]);
                     }
                     else
                     {
@@ -53,7 +53,7 @@ namespace BackUpDb
                     if ((i % 2 == 0) && (i != 0))
                     {
                         flag = true;
-                        databases.Append( "\n" + "                              " + connectform2.getDBBackedUp[i] +",");
+                        databases.Append( "\n" + "                        " + connectform2.getDBBackedUp[i] +",");
                     }
                     else
                     {
@@ -63,7 +63,7 @@ namespace BackUpDb
                         }
                         else
                         {
-                            databases.Append(connectform2.getDBBackedUp[i]);
+                            databases.Append(connectform2.getDBBackedUp[i]+",");
                         }
                     }
                 }                
