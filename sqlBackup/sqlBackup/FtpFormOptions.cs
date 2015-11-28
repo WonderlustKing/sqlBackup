@@ -75,20 +75,25 @@ namespace sqlBackup
 
         private void bTestConn_Click(object sender, EventArgs e)
         {
-            FtpWebRequest ftp = (FtpWebRequest)FtpWebRequest.Create("ftp://ftp.kernel.org");
-            
-            ftp.Credentials = new NetworkCredential("anonymous", "");
-            try
+            if (tbHost.Text != "" && tbUsername.Text != "")
             {
-                WebResponse response = ftp.GetResponse();
-                MessageBox.Show("Connection test completed success!");
-                
-                //set your flag
+                FtpWebRequest ftp = (FtpWebRequest)FtpWebRequest.Create("ftp://" + tbHost.Text);
+
+                ftp.Credentials = new NetworkCredential(tbUsername.Text, tbPasswd.Text);
+                ftp.Method = WebRequestMethods.Ftp.ListDirectory;
+                try
+                {
+                    WebResponse response = ftp.GetResponse();
+                    MessageBox.Show("Connection test completed success!");
+
+                    //set your flag
+                }
+                catch (WebException ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
             }
-            catch(WebException ex)
-            {
-                MessageBox.Show("Error: "+ex.Message);
-            }
+            else MessageBox.Show("Host address and Username fields cant be empty");
         }
     }
 }
