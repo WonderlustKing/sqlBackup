@@ -19,6 +19,7 @@ namespace BackUpDb
         private Form2 connectform2 = null;
         public Form3(Form2 callingForm2)
         {
+            this.BackColor = Color.Red;
             connectform2 = callingForm2 as Form2;
             InitializeComponent();
         }
@@ -34,7 +35,7 @@ namespace BackUpDb
                     if ((i % 2 == 0) && (i != 0))
                     {
                         flag = true;
-                        databases.Append( "\n" + "                              " + connectform2.getDBBackedUp[i]);
+                        databases.Append( "\n" + "                           " + connectform2.getDBBackedUp[i]);
                     }
                     else
                     {
@@ -53,7 +54,7 @@ namespace BackUpDb
                     if ((i % 2 == 0) && (i != 0))
                     {
                         flag = true;
-                        databases.Append( "\n" + "                              " + connectform2.getDBBackedUp[i] +",");
+                        databases.Append( "\n" + "                           " + connectform2.getDBBackedUp[i] +",");
                     }
                     else
                     {
@@ -71,15 +72,19 @@ namespace BackUpDb
             if (connectform2.getConnection)
             {
                 
-                label1.Text = "Hostname: " + connectform2.getHostname + "\n" +
+                label1.Text = "-----------------------------------------------------------------------------------------------" + "\n" +
+                               "Hostname: " + connectform2.getHostname + "\n" +
                               "Username: "  +connectform2.getUsername + "\n" +
-                             "DataBase(s): "+Convert.ToString(databases) + "\n" + "Day: " + connectform2.getDate + "\n" + "Time: " + connectform2.getTime;
+                             "DataBase(s): "+Convert.ToString(databases) + "\n" + "Day: " + connectform2.getDate + "\n" + "Time: " + connectform2.getTime+
+                             "-----------------------------------------------------------------------------------------------";
             }
             else
             {
-                label1.Text = "Hostname: " + connectform2.getHostname2 + "\n" +
+                label1.Text = "-----------------------------------------------------------------------------------------------" + "\n"
+                            + "Hostname: " + connectform2.getHostname2 + "\n" +
                               "Username: " + connectform2.getUsername2 + "\n" +
-                             "DataBase(s): " + Convert.ToString(databases) + "\n" + "Day: "+connectform2.getDate + "\n" + "Time: " + connectform2.getTime;
+                             "DataBase(s): " + Convert.ToString(databases) + "\n" + "Day: "+connectform2.getDate + "\n" + "Time: " + connectform2.getTime + "\n" +
+                             "-----------------------------------------------------------------------------------------------";
             }
             
         }

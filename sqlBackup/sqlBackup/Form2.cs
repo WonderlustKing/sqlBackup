@@ -177,7 +177,7 @@ namespace BackUpDb
             if (response.Equals("Backup completed successfully!"))
             {
                 success = true;
-                Console.WriteLine(success);
+               
             }            
         }
 
@@ -280,7 +280,7 @@ namespace BackUpDb
             
             if (e.CloseReason == CloseReason.UserClosing)
             {
-                Console.WriteLine(this.DialogResult);
+                
                 if (this.DialogResult == DialogResult.None)
                 {
                     
