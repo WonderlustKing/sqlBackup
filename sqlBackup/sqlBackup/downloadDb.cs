@@ -58,14 +58,10 @@ namespace sqlBackup
                     int minute = backupTime.Minute;
                     int second = backupTime.Second;
 
-                    int ms = backupTime.Millisecond;
                     String tmestr = backupTime.ToString();
                     date = Convert.ToString(day)+"/"+ Convert.ToString(month) + "/" + Convert.ToString(year) ;
                     time = Convert.ToString(hour) + ":" + Convert.ToString(minute) + ":" + Convert.ToString(second);
-                    // check if sqlBackup directory exist in user application path, if not create it
-                    System.IO.FileInfo check_app_path = new System.IO.FileInfo(user_path);
-                    check_app_path.Directory.Create();
-
+                    
                     // name of subfolder for this backup
                     string backup_subfolder = user_path + "\\" + "SqlBackup_" + day + "-" + month + "-" + year + "-" + hour + "_" + minute + "\\";
 
@@ -107,22 +103,24 @@ namespace sqlBackup
                         file.Close();
                     }
 
-                            using (ZipFile zip = new ZipFile())
-                            {
-                                zip.UseUnicodeAsNecessary = true;
-                                zip.AddDirectory(backup_subfolder);
-                                zip.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
-                                zip.Comment = "This zip was created at " + System.DateTime.Now.ToString("G");
-                                zip.Save(backup_subfolder+"\\sqlBackup"+ day + "-" + month + "-" + year + "-" + hour + "_" + minute + ".zip");
-                            }
+                    // zip the backup subfolder 
+                    using (ZipFile zip = new ZipFile())
+                    {
+                        zip.UseUnicodeAsNecessary = true;
+                        zip.AddDirectory(backup_subfolder);
+                        zip.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
+                        zip.Comment = "This zip was created at " + System.DateTime.Now.ToString("G");
+                        zip.Save(user_path+"\\sqlBackup"+ day + "-" + month + "-" + year + "-" + hour + "_" + minute + ".zip");
+                    }
+                    // after zip was created delete the backup subfolder
+                    Directory.Delete(backup_subfolder, true);
 
                     return "Backup completed successfully!";
 
                 }
                 catch (IOException e)
                 {
-                    //return "Backup failed, an IO error has occured";
-                    return e.Message.ToString();
+                    return "Error: "+e.Message.ToString();
                 }
             }
             else return "Please first select database(s) for backup";
