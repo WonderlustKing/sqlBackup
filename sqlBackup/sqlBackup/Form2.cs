@@ -23,7 +23,7 @@ namespace BackUpDb
         Form3 form3 = null;
         SendEmail mail = null;
         private Form1 connectForm = null;
-        private DownloadDb downloadDB;
+        private BackupDb backupDB;
         private FtpFormOptions ftpOptions;
         private string ftpHost;
         private string ftpUsername;
@@ -168,10 +168,10 @@ namespace BackUpDb
             }
            
             // change the databaseName with yours
-            downloadDB = new DownloadDb(connectForm.getHostname, connectForm.getUsername, connectForm.getPassword, dbForBackup, local_path);
+            backupDB = new BackupDb(connectForm.getHostname, connectForm.getUsername, connectForm.getPassword, dbForBackup, local_path,ftpHost,ftpUsername,ftpPassword);
             
             //check the response of backupdb() method, if true successed, else failed
-            response = downloadDB.backupdb();
+            response = backupDB.downloadDb();
             MessageBox.Show(response);
             
             if (response.Equals("Backup completed successfully!"))
@@ -232,15 +232,15 @@ namespace BackUpDb
         //gia tis baseis kai einai geniko 
         public string getTime
         {
-            get { return downloadDB.getTime; }
+            get { return backupDB.getTime; }
         }
         public string getDate
         {
-            get { return downloadDB.getDate; }
+            get { return backupDB.getDate; }
         }
         public string[] getDBBackedUp
         {
-            get { return downloadDB.getDbBackedUp; }
+            get { return backupDB.getDbBackedUp; }
         }
 
         public string FTPHost

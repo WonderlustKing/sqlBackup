@@ -50,7 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DownloadDb.cs" />
+    <Compile Include="BackupDb.cs" />
     <Compile Include="FtpFormOptions.cs">
       <SubType>Form</SubType>
     </Compile>
