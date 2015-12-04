@@ -16,6 +16,12 @@ namespace BackUpDb
         private String port;
         private String username;
         private String password;
+        private String ftphost;
+        private String ftpuser;
+        private String ftppass;
+        private String[] dbbase;
+        private String mail;
+        private TimeSpan time;
         StringBuilder stringsave = new StringBuilder();
         public Save(String hostname, String port,String username,String password)
         {
@@ -23,6 +29,18 @@ namespace BackUpDb
             setUsername(username);
             setPassword(password);
             
+        }
+        public Save(TimeSpan time,String hostname, String port, String username, String password,String ftphost,String ftpuser,String ftppass,String mail,String[] dbbase)
+        {
+            this.time = time;
+            setHostname(hostname, port);
+            setUsername(username);
+            setPassword(password);
+            this.ftphost = ftphost;
+            this.ftpuser = ftpuser;
+            this.ftppass = ftppass;
+            this.dbbase = dbbase;
+            this.mail = mail;
         }
         public void setHostname(String hostname, String port)
         {
@@ -110,6 +128,48 @@ namespace BackUpDb
         public String PathToShow()
         {
             return Convert.ToString(folderpath);
+        }
+        public void ScheduleFile(String path)
+        {
+            path += "\\"+getHostname()+".txt";
+            StreamWriter ScheduleFile = null;
+            if (File.Exists(Convert.ToString(path)))
+            {//elenxo an to arxeio uparxei
+                ScheduleFile = new StreamWriter(Convert.ToString(path)); //antikeimeno gia na grapsw sto arxeio to opio kai ftiaxnw
+                ScheduleFile.WriteLine(time);
+                ScheduleFile.WriteLine(getHostname());
+                ScheduleFile.WriteLine(getPort());
+                ScheduleFile.WriteLine(getUsername());
+                ScheduleFile.WriteLine(getPassword());
+                ScheduleFile.WriteLine(this.ftphost);
+                ScheduleFile.WriteLine(this.ftpuser);
+                ScheduleFile.WriteLine(this.ftppass);
+                ScheduleFile.WriteLine(this.mail);
+                for (int i = 0; i < dbbase.Length; i++)
+                {
+                    ScheduleFile.WriteLine(this.dbbase[i]);
+                }
+                ScheduleFile.Close();
+                
+            }
+            else
+            {
+                ScheduleFile = new StreamWriter(Convert.ToString(path)); //antikeimeno gia na grapsw sto arxeio to opio kai ftiaxnw
+                ScheduleFile.WriteLine(time);
+                ScheduleFile.WriteLine(getHostname());
+                ScheduleFile.WriteLine(getPort());
+                ScheduleFile.WriteLine(getUsername());
+                ScheduleFile.WriteLine(getPassword());
+                ScheduleFile.WriteLine(this.ftphost);
+                ScheduleFile.WriteLine(this.ftpuser);
+                ScheduleFile.WriteLine(this.ftppass);
+                ScheduleFile.WriteLine(this.mail);
+                for (int i = 0; i < dbbase.Length; i++)
+                {
+                    ScheduleFile.WriteLine(this.dbbase[i]);
+                }
+                ScheduleFile.Close();
+            }
         }
     }
 }

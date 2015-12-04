@@ -30,6 +30,8 @@ namespace BackUpDb
         private string ftpUsername;
         private string ftpPassword;
         private string local_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\sqlbackup\\";
+        private string schedulefile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+        Save saveschedulefile = null;
         public Form2()
         {
             InitializeComponent();
@@ -87,6 +89,22 @@ namespace BackUpDb
                     mail.PrepareEmail();
                     mail.setEmail();
                     
+                }
+                if (SchedulecheckBox.Checked)
+                {
+                    TimeSpan time  = ScheduleTime.Value.TimeOfDay;
+                    
+                    if (this.connectForm.getConnection)
+                    {
+                        saveschedulefile = new Save(time, this.connectForm.getHostname, this.connectForm.getPort, connectForm.getUsername, connectForm.getPassword, this.FTPHost, this.FTPusername, this.FTPpasswd, emailtextBox.Text, this.getDBBackedUp);
+                        saveschedulefile.ScheduleFile(schedulefile);
+                    }
+                    else if (this.connectForm.getConnection2)
+                    {
+                        saveschedulefile = new Save(time, this.connectForm.getHostname2, this.connectForm.getPort2, this.connectForm.getUsername2, this.connectForm.getPassword2, this.FTPHost, this.FTPusername, this.FTPpasswd, emailtextBox.Text, this.getDBBackedUp);
+                        saveschedulefile.ScheduleFile(schedulefile);
+
+                    }
                 }
                 form3 = new Form3(this);
                 form3.Visible = true;
