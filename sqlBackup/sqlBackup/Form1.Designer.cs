@@ -132,6 +132,7 @@
             this.porttextbox.Name = "porttextbox";
             this.porttextbox.Size = new System.Drawing.Size(100, 20);
             this.porttextbox.TabIndex = 9;
+            this.porttextbox.Text = "3306";
             // 
             // SaveCheckBox
             // 
