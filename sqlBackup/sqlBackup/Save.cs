@@ -85,45 +85,58 @@ namespace BackUpDb
         }
         Boolean uparxei = false;//flag an uparxei idi auto to save se arxeio
         StringBuilder folderpath = new StringBuilder();
+        Boolean flag2 = false;//flag an ola pane kala kai ginei to save
         public void SaveME()
         {
-            FolderBrowserDialog folder = new FolderBrowserDialog();
-            folder.ShowDialog();
-            String getpath = folder.SelectedPath;
-            Console.WriteLine(getpath);
-            Boolean flag2 = false;//flag an ola pane kala kai ginei to save
-            folderpath.Append(getpath+"\\"  + getHostname() + ".txt");//onoma tou arxeiou pou tha ginei to save
-            StreamWriter writter = null;
-            if (File.Exists(Convert.ToString(folderpath)))
-            {//elenxo an to arxeio uparxei
-                writter = new StreamWriter(Convert.ToString(folderpath)); //antikeimeno gia na grapsw sto arxeio to opio kai ftiaxnw
-                writter.WriteLine(getHostname());
-                writter.WriteLine(getPort());
-                writter.WriteLine(getUsername());
-                writter.WriteLine(getPassword());
-                writter.Close();
-                uparxei = true;
-                flag2 = true;
+            try {
+                FolderBrowserDialog folder = new FolderBrowserDialog();
+                DialogResult result = folder.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    String getpath = folder.SelectedPath;
+                    Console.WriteLine(getpath);
+                    
+                    folderpath.Append(getpath + "\\" + getHostname() + ".txt");//onoma tou arxeiou pou tha ginei to save
+                    StreamWriter writter = null;
+                    if (File.Exists(Convert.ToString(folderpath)))
+                    {//elenxo an to arxeio uparxei
+                        writter = new StreamWriter(Convert.ToString(folderpath)); //antikeimeno gia na grapsw sto arxeio to opio kai ftiaxnw
+                        writter.WriteLine(getHostname());
+                        writter.WriteLine(getPort());
+                        writter.WriteLine(getUsername());
+                        writter.WriteLine(getPassword());
+                        writter.Close();
+                        uparxei = true;
+                        flag2 = true;
+                    }
+                    else
+                    {
+                        writter = new StreamWriter(Convert.ToString(folderpath));//antikeimeno gia na grapsw sto arxeio to opio kai ftiaxnw
+                        writter.WriteLine(getHostname());
+                        writter.WriteLine(getPort());
+                        writter.WriteLine(getUsername());
+                        writter.WriteLine(getPassword());
+                        writter.Close();
+                        flag2 = true;
+                    }
+                    if (flag2)//an ginoun ola swsta uparxei den euparxei to arxeio emfanizw ena messagebox gia na to gnwrizei o xrhsths
+                    {
+                        MessageBox.Show("ΤΟ αρχείο αποθηκεύτηκε :" + Convert.ToString(folderpath));
+                    }
+                }
             }
-            else
+            catch (Exception ex)
             {
-                writter = new StreamWriter(Convert.ToString(folderpath));//antikeimeno gia na grapsw sto arxeio to opio kai ftiaxnw
-                writter.WriteLine(getHostname());
-                writter.WriteLine(getPort());
-                writter.WriteLine(getUsername());
-                writter.WriteLine(getPassword());
-                writter.Close();
-                flag2 = true;
+                MessageBox.Show(ex.Message);
             }
-            if (flag2)//an ginoun ola swsta uparxei den euparxei to arxeio emfanizw ena messagebox gia na to gnwrizei o xrhsths
-            {              
-                MessageBox.Show("ΤΟ αρχείο αποθηκεύτηκε :" + Convert.ToString(folderpath));
-            }
-
         }
         public Boolean Exist()
         {
             return uparxei;
+        }
+        public Boolean Saved()
+        {
+            return flag2;
         }
         public String PathToShow()
         {
