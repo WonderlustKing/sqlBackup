@@ -18,6 +18,7 @@ namespace sqlBackup
         private string password;
         private string[] dbname;
         private int numsOfDatabases;
+        private bool uploadFTP;
         private string ftpHost;
         private string ftpUsername;
         private string ftpPassword;
@@ -32,7 +33,8 @@ namespace sqlBackup
         {
 
         }
-        public BackupDb(string hostname,string username,string password, string[] dbname, string user_path, string FTPhost, string FTPusername, string FTPpassword)
+        // constructor for upload backup in ftp
+        public BackupDb(string hostname,string username,string password, string[] dbname, string user_path, string FTPhost, string FTPusername, string FTPpassword )
         {
             this.hostname = hostname;
             this.password = password;
@@ -43,6 +45,19 @@ namespace sqlBackup
             this.ftpHost = FTPhost;
             this.ftpUsername = FTPusername;
             this.ftpPassword = FTPpassword;
+            this.uploadFTP = true;
+        }
+
+        // constructor for only local save backup
+        public BackupDb(string hostname,string username,string password,string[] dbname, string user_path)
+        {
+            this.hostname = hostname;
+            this.password = password;
+            this.username = username;
+            this.dbname = dbname;
+            this.user_path = user_path;
+            this.numsOfDatabases = dbname.Length;
+            this.uploadFTP = false;
         }
 
         // backup a database
@@ -122,7 +137,8 @@ namespace sqlBackup
                     // after zip was created delete the backup subfolder
                     Directory.Delete(backup_subfolder, true);
 
-                    uploadToFTP(user_path + "\\" + backup_name + ".zip", backup_name + ".zip");
+                    // if uplaodFTP is true upload the backup to ftp server
+                    if(uploadFTP) uploadToFTP(user_path + "\\" + backup_name + ".zip", backup_name + ".zip");
 
                     return "Backup completed successfully!";
 
@@ -130,6 +146,10 @@ namespace sqlBackup
                 catch (IOException e)
                 {
                     return "Error: "+e.Message.ToString();
+                }
+                catch (WebException ex)
+                {
+                    return "Error: " + ex.Message.ToString() +", please check hostname,username and password for the FTP";
                 }
             }
             else return "Please first select database(s) for backup";
@@ -147,13 +167,15 @@ namespace sqlBackup
             byte[] b = File.ReadAllBytes(sourceFile);
 
             ftpReq.ContentLength = b.Length;
-            using (Stream s = ftpReq.GetRequestStream())
-            {
-                s.Write(b, 0, b.Length);
-            }
-            
-            FtpWebResponse ftpResp = (FtpWebResponse)ftpReq.GetResponse();
-            
+           
+                using (Stream s = ftpReq.GetRequestStream())
+                {
+                    s.Write(b, 0, b.Length);
+                }
+
+                FtpWebResponse ftpResp = (FtpWebResponse)ftpReq.GetResponse();
+           
+
         }
 
         public string getPath()

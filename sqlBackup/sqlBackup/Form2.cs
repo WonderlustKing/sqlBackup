@@ -25,6 +25,7 @@ namespace BackUpDb
         private Form1 connectForm = null;
         private BackupDb backupDB;
         private FtpFormOptions ftpOptions;
+        private bool uploadToFTP = false;
         private string ftpHost;
         private string ftpUsername;
         private string ftpPassword;
@@ -166,10 +167,18 @@ namespace BackUpDb
                 dbForBackup[i] = itemChecked.ToString();
                 i++;
             }
-           
-            // change the databaseName with yours
-            backupDB = new BackupDb(connectForm.getHostname, connectForm.getUsername, connectForm.getPassword, dbForBackup, local_path,ftpHost,ftpUsername,ftpPassword);
-            
+
+            // check if upload to ftp is checked and initialize the backupDB object with suitable constructor
+            if (cbUploadFtp.Checked)
+            {
+                uploadToFTP = true;
+                backupDB = new BackupDb(connectForm.getHostname, connectForm.getUsername, connectForm.getPassword, dbForBackup, local_path, ftpHost, ftpUsername, ftpPassword);
+            }
+            else
+            {
+                uploadToFTP = false;
+                backupDB = new BackupDb(connectForm.getHostname, connectForm.getUsername, connectForm.getPassword, dbForBackup, local_path);
+            }
             //check the response of backupdb() method, if true successed, else failed
             response = backupDB.downloadDb();
             MessageBox.Show(response);
