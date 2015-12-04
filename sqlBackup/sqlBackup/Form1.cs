@@ -76,7 +76,7 @@ namespace BackUpDb
                     savedlabel.Text = "Already Exist";
                     wheresaved.Text = save.PathToShow();
                 }
-                else
+                else if(save.Saved())
                 {
                     savedlabel.Text = "Saved To ->";
                     wheresaved.Text = save.PathToShow();
