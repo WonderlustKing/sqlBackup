@@ -116,6 +116,10 @@ namespace BackUpDb
         {
             get { return passwordtextbox.Text; }
         }
+        public string getPort
+        {
+            get { return porttextbox.Text; }
+        }
         public bool getConnection2 {//stelnei sthn forma2 ta stoixeia tou xrhsth otan kanei connect apo to Load
             get { return loadfile.Connected(); }
         }
@@ -131,7 +135,10 @@ namespace BackUpDb
         {
             get { return loadfile.getPassword(); }
         }
-
+        public string getPort2
+        {
+            get { return loadfile.getPort(); }
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
 
