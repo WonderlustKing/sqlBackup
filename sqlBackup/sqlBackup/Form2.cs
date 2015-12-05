@@ -81,15 +81,9 @@ namespace BackUpDb
 
         private void Runbutton_Click(object sender, EventArgs e)
         {
-            if ((((this.connectForm.getConnection) || (this.connectForm.getConnection2))) && (success))
+            if ((((this.connectForm.getConnection) || (this.connectForm.getConnection2))))
             {
-                if (emailnotcheckBox.Checked)
-                {
-                    mail = new SendEmail(emailtextBox.Text,response);
-                    mail.PrepareEmail();
-                    mail.setEmail();
-                    
-                }
+                
                 if (SchedulecheckBox.Checked)
                 {
                     TimeSpan time  = ScheduleTime.Value.TimeOfDay;
@@ -106,8 +100,6 @@ namespace BackUpDb
 
                     }
                 }
-                form3 = new Form3(this);
-                form3.Visible = true;
             }
         }
 
@@ -169,44 +161,6 @@ namespace BackUpDb
             Application.Exit();
         }
 
-        private void getBackuplinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            //MessageBox.Show(local_path.ToString());
-            
-            // get number of selected databases from checklistBox
-            int selectedDbNum = DatabasesCheckedListBox.CheckedItems.Count;
-
-            //array with selected databases number length, for store all selected databases
-            string[] dbForBackup = new string[selectedDbNum];
-            //get names of selected databases
-            int i = 0;
-            foreach (object itemChecked in DatabasesCheckedListBox.CheckedItems)
-            {
-                dbForBackup[i] = itemChecked.ToString();
-                i++;
-            }
-
-            // check if upload to ftp is checked and initialize the backupDB object with suitable constructor
-            if (cbUploadFtp.Checked)
-            {
-                uploadToFTP = true;
-                backupDB = new BackupDb(connectForm.getHostname, connectForm.getUsername, connectForm.getPassword, dbForBackup, local_path, ftpHost, ftpUsername, ftpPassword);
-            }
-            else
-            {
-                uploadToFTP = false;
-                backupDB = new BackupDb(connectForm.getHostname, connectForm.getUsername, connectForm.getPassword, dbForBackup, local_path);
-            }
-            //check the response of backupdb() method, if true successed, else failed
-            response = backupDB.downloadDb();
-            MessageBox.Show(response);
-            
-            if (response.Equals("Backup completed successfully!"))
-            {
-                success = true;
-                Console.WriteLine(success);
-            }            
-        }
 
         public string LocalPath
         {
@@ -299,7 +253,6 @@ namespace BackUpDb
                 ftpOptions = new FtpFormOptions(this,ftpHost,ftpUsername,ftpPassword);
                 ftpOptions.Visible = true;
             }
-            
         }
 
         private void Form1_FormClosing(Object sender, FormClosingEventArgs e)
@@ -314,6 +267,67 @@ namespace BackUpDb
                     Application.Exit();
                 }
             }
+        }
+
+        private void button_Click(object sender, EventArgs e)
+        {
+            if((this.connectForm.getConnection) || (this.connectForm.getConnection2))
+            {
+                //MessageBox.Show(local_path.ToString());
+
+                // get number of selected databases from checklistBox
+                int selectedDbNum = DatabasesCheckedListBox.CheckedItems.Count;
+
+                //array with selected databases number length, for store all selected databases
+                string[] dbForBackup = new string[selectedDbNum];
+                //get names of selected databases
+                int i = 0;
+                foreach (object itemChecked in DatabasesCheckedListBox.CheckedItems)
+                {
+                    dbForBackup[i] = itemChecked.ToString();
+                    i++;
+                }
+
+                // check if upload to ftp is checked and initialize the backupDB object with suitable constructor
+                if (cbUploadFtp.Checked)
+                {
+                    uploadToFTP = true;
+                    backupDB = new BackupDb(connectForm.getHostname, connectForm.getUsername, connectForm.getPassword, dbForBackup, local_path, ftpHost, ftpUsername, ftpPassword);
+                }
+                else
+                {
+                    uploadToFTP = false;
+                    backupDB = new BackupDb(connectForm.getHostname, connectForm.getUsername, connectForm.getPassword, dbForBackup, local_path);
+                }
+                //check the response of backupdb() method, if true successed, else failed
+                response = backupDB.downloadDb();
+                MessageBox.Show(response);
+
+                if (response.Equals("Backup completed successfully!"))
+                {
+                    success = true;
+                    Console.WriteLine(success);
+                }
+
+                if(success)
+                {
+
+                    if (emailnotcheckBox.Checked)
+                    {
+                        mail = new SendEmail(emailtextBox.Text,response);
+                        mail.PrepareEmail();
+                        mail.setEmail();
+                    }
+
+                    form3 = new Form3(this);
+                    form3.Visible = true;
+                }
+            }
+        }
+
+        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

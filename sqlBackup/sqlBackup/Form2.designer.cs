@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,8 +43,7 @@
             this.SchedulecheckBox = new System.Windows.Forms.CheckBox();
             this.ScheduleLabel = new System.Windows.Forms.Label();
             this.ScheduleTime = new System.Windows.Forms.DateTimePicker();
-            this.Runbutton = new System.Windows.Forms.Button();
-            this.getBackuplinkLabel = new System.Windows.Forms.LinkLabel();
+            this.SetSchedulebutton = new System.Windows.Forms.Button();
             this.selectDestLabel = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -58,6 +56,8 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.Scheduler = new System.Windows.Forms.Label();
             this.DatabasesCheckedListBox = new System.Windows.Forms.CheckedListBox();
+            this.button = new System.Windows.Forms.Button();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -79,35 +79,29 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
-            // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.saveToolStripMenuItem.Text = "Save";
+            this.fileToolStripMenuItem.Click += new System.EventHandler(this.fileToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.saveAsToolStripMenuItem.Text = "Save As...";
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Text = "Open";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(120, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -122,11 +116,13 @@
             // logFileToolStripMenuItem
             // 
             this.logFileToolStripMenuItem.Name = "logFileToolStripMenuItem";
-            this.logFileToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.logFileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.logFileToolStripMenuItem.Text = "Log File";
             // 
             // helpToolStripMenuItem
             // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "&Help";
@@ -193,26 +189,15 @@
             this.ScheduleTime.TabIndex = 9;
             this.ScheduleTime.Value = new System.DateTime(2015, 10, 27, 12, 25, 0, 0);
             // 
-            // Runbutton
+            // SetSchedulebutton
             // 
-            this.Runbutton.Location = new System.Drawing.Point(391, 461);
-            this.Runbutton.Name = "Runbutton";
-            this.Runbutton.Size = new System.Drawing.Size(107, 23);
-            this.Runbutton.TabIndex = 10;
-            this.Runbutton.Text = "Run";
-            this.Runbutton.UseVisualStyleBackColor = true;
-            this.Runbutton.Click += new System.EventHandler(this.Runbutton_Click);
-            // 
-            // getBackuplinkLabel
-            // 
-            this.getBackuplinkLabel.AutoSize = true;
-            this.getBackuplinkLabel.Location = new System.Drawing.Point(9, 461);
-            this.getBackuplinkLabel.Name = "getBackuplinkLabel";
-            this.getBackuplinkLabel.Size = new System.Drawing.Size(86, 13);
-            this.getBackuplinkLabel.TabIndex = 11;
-            this.getBackuplinkLabel.TabStop = true;
-            this.getBackuplinkLabel.Text = "Get backup now";
-            this.getBackuplinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.getBackuplinkLabel_LinkClicked);
+            this.SetSchedulebutton.Location = new System.Drawing.Point(391, 470);
+            this.SetSchedulebutton.Name = "SetSchedulebutton";
+            this.SetSchedulebutton.Size = new System.Drawing.Size(107, 23);
+            this.SetSchedulebutton.TabIndex = 10;
+            this.SetSchedulebutton.Text = "Set Schedule";
+            this.SetSchedulebutton.UseVisualStyleBackColor = true;
+            this.SetSchedulebutton.Click += new System.EventHandler(this.Runbutton_Click);
             // 
             // selectDestLabel
             // 
@@ -334,22 +319,38 @@
             // 
             this.DatabasesCheckedListBox.CheckOnClick = true;
             this.DatabasesCheckedListBox.FormattingEnabled = true;
-            this.DatabasesCheckedListBox.Location = new System.Drawing.Point(12, 72);
+            this.DatabasesCheckedListBox.Location = new System.Drawing.Point(12, 42);
             this.DatabasesCheckedListBox.Name = "DatabasesCheckedListBox";
-            this.DatabasesCheckedListBox.Size = new System.Drawing.Size(178, 364);
+            this.DatabasesCheckedListBox.Size = new System.Drawing.Size(178, 439);
             this.DatabasesCheckedListBox.TabIndex = 17;
+            // 
+            // button
+            // 
+            this.button.Location = new System.Drawing.Point(258, 470);
+            this.button.Name = "button";
+            this.button.Size = new System.Drawing.Size(119, 23);
+            this.button.TabIndex = 18;
+            this.button.Text = "Get backup and store";
+            this.button.UseVisualStyleBackColor = true;
+            this.button.Click += new System.EventHandler(this.button_Click);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Text = "About";
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(520, 505);
+            this.Controls.Add(this.button);
             this.Controls.Add(this.DatabasesCheckedListBox);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.Runbutton);
-            this.Controls.Add(this.getBackuplinkLabel);
+            this.Controls.Add(this.SetSchedulebutton);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
@@ -381,13 +382,11 @@
         private System.Windows.Forms.CheckBox SchedulecheckBox;
         private System.Windows.Forms.Label ScheduleLabel;
         private System.Windows.Forms.DateTimePicker ScheduleTime;
-        private System.Windows.Forms.Button Runbutton;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.Button SetSchedulebutton;
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logFileToolStripMenuItem;
-        private System.Windows.Forms.LinkLabel getBackuplinkLabel;
         private System.Windows.Forms.Label selectDestLabel;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -400,5 +399,7 @@
         private System.Windows.Forms.Label email;
         private System.Windows.Forms.Label Scheduler;
         private System.Windows.Forms.CheckedListBox DatabasesCheckedListBox;
+        private System.Windows.Forms.Button button;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
