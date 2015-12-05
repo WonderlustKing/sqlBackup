@@ -3,8 +3,10 @@
 3306
 root
 
-
-
-
-
-webauth
+testbed.it.teithe.gr
+user1
+Fj98(de#
+smoschop@gmail.com
+cdcol
+mysql
+performance_schema
