@@ -144,16 +144,9 @@ namespace BackUpDb
                     tcpclnt = new TcpClient();
                     StreamReader readfromLoad = new StreamReader(schedulefile);
                     ConnectToServer connection = new ConnectToServer();
-                    //connection.setHostname(readfromLoad.ReadLine(), readfromLoad.ReadLine());
-                    //connection.setUsername(readfromLoad.ReadLine());
-                    //connection.setPassword(readfromLoad.ReadLine());
-                    setTime(readfromLoad.ReadLine());
-                    
-                    
-                    setHostname(readfromLoad.ReadLine(), readfromLoad.ReadLine());
-                    
+                    setTime(readfromLoad.ReadLine());                    
+                    setHostname(readfromLoad.ReadLine(), readfromLoad.ReadLine());                  
                     setUsername(readfromLoad.ReadLine());
-                    
                     setPassword(readfromLoad.ReadLine());
                     setFtpHostname(readfromLoad.ReadLine());
                     setFtpusername(readfromLoad.ReadLine());
@@ -178,7 +171,6 @@ namespace BackUpDb
                         BackupDb back = new BackupDb(getHostname(),getUsername(),getPassword(),getbackup(), @"C:\Users\Bill\AppData\Roaming\sqlbackup\", getFtphostname(),getFtpusername(),getFtppassworde());
                         back.downloadDb();
                         tcpclnt.Close();
-
                     }
                 }
             }catch(Exception ex)
