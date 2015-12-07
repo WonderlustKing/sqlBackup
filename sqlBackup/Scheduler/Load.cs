@@ -8,18 +8,23 @@ using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
 using System.Collections.Generic;
+using sqlBackup;
 namespace BackUpDb
 {
     class Load
     {
+        private String time;
         private String hostname;
         private String port;
         private String username;
         private String password;
         private String ftpusername;
+        //SendEmail mail = null;
+        private String email;
         private String ftppassword;
+        private String ftphostname;
         private List<String> dbBackUp = new List<string>();
-        StringBuilder stringsave = new StringBuilder();
+        StringBuilder stringsave = null;
         public Load(/*String hostname, String port, String username, String password*/)
         {
             
@@ -27,6 +32,10 @@ namespace BackUpDb
             //setUsername(username);
             //setPassword(password);
 
+        }
+        public void setTime(String time)
+        {
+            this.time = time;
         }
         public void setHostname(String hostname, String port)
         {
@@ -43,6 +52,26 @@ namespace BackUpDb
         {
             this.password = password;
             stringsave.Append(this.password);
+        }
+        public void setFtpHostname(String ftphostname)
+        {
+            this.ftphostname = ftphostname;
+        }
+        public void setFtpusername(String ftpusername)
+        {
+            this.ftpusername = ftpusername;
+        }
+        public void setFtppassword(String ftppassworde)
+        {
+            this.ftppassword = ftppassworde;
+        }
+        public void setEmail(String email)
+        {
+            this.email = email;
+        }
+        public String getTime()
+        {
+            return time;
         }
         public String getHostname()
         {
@@ -64,14 +93,6 @@ namespace BackUpDb
 
             return this.password;
         }
-        public void setFtpusername(String ftpusername)
-        {
-            this.ftpusername = username;
-        }
-        public void setFtppassword(String ftppassworde)
-        {
-            this.ftppassword = ftppassworde;
-        }
         public String getFtpusername()
         {
             return this.ftpusername;
@@ -79,6 +100,14 @@ namespace BackUpDb
         public String getFtppassworde()
         {
             return this.ftppassword;
+        }
+        public String getFtphostname()
+        {
+            return this.ftphostname;
+        }
+        public String getEmaiil()
+        {
+            return email;
         }
         public void setbackup(String backname)
         {
@@ -92,37 +121,69 @@ namespace BackUpDb
         public String ToString()
         {
             return Convert.ToString(stringsave);
-        } 
-        TcpClient tcpclnt = new TcpClient();
+        }
+
+        TcpClient tcpclnt = null;
+
         public void LoadFromFile()
         {
             try
             {
-                OpenFileDialog openfile = new OpenFileDialog();
-                openfile.ShowDialog();
-                String filename = openfile.FileName;
-                StreamReader readfromLoad = new StreamReader(filename);
-                ConnectToServer connection = new ConnectToServer();
-                //connection.setHostname(readfromLoad.ReadLine(), readfromLoad.ReadLine());
-                //connection.setUsername(readfromLoad.ReadLine());
-                //connection.setPassword(readfromLoad.ReadLine());
-                setHostname(readfromLoad.ReadLine(), readfromLoad.ReadLine());
-                setUsername(readfromLoad.ReadLine());
-                setPassword(readfromLoad.ReadLine());
-                //setFtpHostname(readfromLoad.ReadLine());
-                setFtpusername(readfromLoad.ReadLine());
-                setFtppassword(readfromLoad.ReadLine());
-                int i = 0;
                 
-                do {
-                    setbackup(readfromLoad.ReadLine());
-                    i++;
-                        } while (!(readfromLoad.EndOfStream));
-            
-                tcpclnt.Connect(this.hostname, Convert.ToInt32(this.port));
+                string schedulefile = null;
+                string[] dirs = Directory.GetFiles(@"C:\\Users\\Bill\\Documents\\GitHubVisualStudio\\sqlBackup\\sqlBackup\\sqlBackup\\ScheduleFile\\");
+                foreach (string dir in dirs)
+                {
+                    stringsave = new StringBuilder();
+                    string[] pin = getbackup();
+                    for (int k = 0; k < pin.Length; k++){
+                        Console.WriteLine(pin[k].ToString());
+                    }
+
+                    schedulefile = dir;
+                    tcpclnt = new TcpClient();
+                    StreamReader readfromLoad = new StreamReader(schedulefile);
+                    ConnectToServer connection = new ConnectToServer();
+                    //connection.setHostname(readfromLoad.ReadLine(), readfromLoad.ReadLine());
+                    //connection.setUsername(readfromLoad.ReadLine());
+                    //connection.setPassword(readfromLoad.ReadLine());
+                    setTime(readfromLoad.ReadLine());
+                    
+                    
+                    setHostname(readfromLoad.ReadLine(), readfromLoad.ReadLine());
+                    
+                    setUsername(readfromLoad.ReadLine());
+                    
+                    setPassword(readfromLoad.ReadLine());
+                    setFtpHostname(readfromLoad.ReadLine());
+                    setFtpusername(readfromLoad.ReadLine());
+                    setFtppassword(readfromLoad.ReadLine());
+                    setEmail(readfromLoad.ReadLine());
+                    int i = 0;
+                    {
+
+                        setbackup(readfromLoad.ReadLine());
+                        i++;
+
+                    } while (!(readfromLoad.EndOfStream));
+
+                    for (int k = 0; k < pin.Length; k++)
+                    {
+                        Console.WriteLine(pin[k].ToString());
+                    }
+
+                    tcpclnt.Connect(hostname, Convert.ToInt32(port));
+                    if (tcpclnt.Connected)
+                    {
+                        BackupDb back = new BackupDb(getHostname(),getUsername(),getPassword(),getbackup(), @"C:\Users\Bill\AppData\Roaming\sqlbackup\", getFtphostname(),getFtpusername(),getFtppassworde());
+                        back.downloadDb();
+                        tcpclnt.Close();
+
+                    }
+                }
             }catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.StackTrace);
             }
         }
         public Boolean Connected()
