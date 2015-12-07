@@ -76,16 +76,15 @@ namespace BackUpDb
                     savedlabel.Text = "Already Exist";
                     wheresaved.Text = save.PathToShow();
                 }
-                else if(save.Saved())
+                else if (save.Saved())
                 {
                     savedlabel.Text = "Saved To ->";
                     wheresaved.Text = save.PathToShow();
                 }
+                else
+                    SaveCheckBox.Checked = false;
             }
-            else
-            {
-                SaveCheckBox.Checked = false;
-            }
+            
         }
         Load loadfile = new Load();
         //otan o xrhsths thelei na fortosei ena save pou exei kanei

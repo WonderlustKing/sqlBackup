@@ -83,22 +83,32 @@ namespace BackUpDb
         {
             if ((((this.connectForm.getConnection) || (this.connectForm.getConnection2))))
             {
-                
-                if (SchedulecheckBox.Checked)
+                try
                 {
-                    TimeSpan time  = ScheduleTime.Value.TimeOfDay;
-                    
-                    if (this.connectForm.getConnection)
-                    {
-                        saveschedulefile = new Save(time, this.connectForm.getHostname, this.connectForm.getPort, connectForm.getUsername, connectForm.getPassword, this.FTPHost, this.FTPusername, this.FTPpasswd, emailtextBox.Text, this.getDBBackedUp);
-                        saveschedulefile.ScheduleFile(schedulefile);
-                    }
-                    else if (this.connectForm.getConnection2)
-                    {
-                        saveschedulefile = new Save(time, this.connectForm.getHostname2, this.connectForm.getPort2, this.connectForm.getUsername2, this.connectForm.getPassword2, this.FTPHost, this.FTPusername, this.FTPpasswd, emailtextBox.Text, this.getDBBackedUp);
-                        saveschedulefile.ScheduleFile(schedulefile);
 
+                    if (SchedulecheckBox.Checked)
+                    {
+                        TimeSpan time = ScheduleTime.Value.TimeOfDay;
+
+                        if (this.connectForm.getConnection)
+                        {
+                            saveschedulefile = new Save(time, this.connectForm.getHostname, this.connectForm.getPort, connectForm.getUsername, connectForm.getPassword, this.FTPHost, this.FTPusername, this.FTPpasswd, emailtextBox.Text, this.getDBBackedUp);
+                            saveschedulefile.ScheduleFile(schedulefile);
+                            ErrorScheduleLabel.Text = "Schedule completed sucessfully";
+                        }
+                        else if (this.connectForm.getConnection2)
+                        {
+                            saveschedulefile = new Save(time, this.connectForm.getHostname2, this.connectForm.getPort2, this.connectForm.getUsername2, this.connectForm.getPassword2, this.FTPHost, this.FTPusername, this.FTPpasswd, emailtextBox.Text, this.getDBBackedUp);
+                            saveschedulefile.ScheduleFile(schedulefile);
+                            ErrorScheduleLabel.Text = "Schedule completed sucessfully";
+
+                        }
                     }
+
+                }
+                catch (Exception x)
+                {
+                    ErrorScheduleLabel.Text = "Choose a database first";
                 }
             }
         }
