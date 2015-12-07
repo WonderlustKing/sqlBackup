@@ -20,7 +20,9 @@ namespace Scheduler
 
             //pos na diabazei tis baseis pou phre apo to arxeio mia mia
             String[] pinakas = load.getbackup();//periexei oles tis baseis pou tha kaneis backup
-           
+            
+            
+                
         }
     }
 }
