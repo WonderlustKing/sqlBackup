@@ -37,6 +37,7 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.emailnotcheckBox = new System.Windows.Forms.CheckBox();
             this.emailLabel = new System.Windows.Forms.Label();
             this.emailtextBox = new System.Windows.Forms.TextBox();
@@ -57,7 +58,7 @@
             this.Scheduler = new System.Windows.Forms.Label();
             this.DatabasesCheckedListBox = new System.Windows.Forms.CheckedListBox();
             this.button = new System.Windows.Forms.Button();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ErrorScheduleLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -90,18 +91,18 @@
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.saveAsToolStripMenuItem.Text = "Open";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(100, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -116,7 +117,7 @@
             // logFileToolStripMenuItem
             // 
             this.logFileToolStripMenuItem.Name = "logFileToolStripMenuItem";
-            this.logFileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.logFileToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.logFileToolStripMenuItem.Text = "Log File";
             // 
             // helpToolStripMenuItem
@@ -126,6 +127,12 @@
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "&Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Text = "About";
             // 
             // emailnotcheckBox
             // 
@@ -295,13 +302,14 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.ErrorScheduleLabel);
             this.groupBox3.Controls.Add(this.Scheduler);
             this.groupBox3.Controls.Add(this.SchedulecheckBox);
             this.groupBox3.Controls.Add(this.ScheduleLabel);
             this.groupBox3.Controls.Add(this.ScheduleTime);
             this.groupBox3.Location = new System.Drawing.Point(242, 336);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(256, 108);
+            this.groupBox3.Size = new System.Drawing.Size(256, 116);
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
             // 
@@ -334,11 +342,13 @@
             this.button.UseVisualStyleBackColor = true;
             this.button.Click += new System.EventHandler(this.button_Click);
             // 
-            // aboutToolStripMenuItem
+            // ErrorScheduleLabel
             // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.aboutToolStripMenuItem.Text = "About";
+            this.ErrorScheduleLabel.AutoSize = true;
+            this.ErrorScheduleLabel.Location = new System.Drawing.Point(13, 100);
+            this.ErrorScheduleLabel.Name = "ErrorScheduleLabel";
+            this.ErrorScheduleLabel.Size = new System.Drawing.Size(0, 13);
+            this.ErrorScheduleLabel.TabIndex = 11;
             // 
             // Form2
             // 
@@ -401,5 +411,6 @@
         private System.Windows.Forms.CheckedListBox DatabasesCheckedListBox;
         private System.Windows.Forms.Button button;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.Label ErrorScheduleLabel;
     }
 }
