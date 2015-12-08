@@ -156,21 +156,16 @@ namespace BackUpDb
             {
 
                 string schedulefile = null;
-
+                string schedulefile2 = @Directory.GetParent(@Directory.GetCurrentDirectory()).Parent.Parent.FullName + @"\sqlBackup\ScheduleFile\";
                 //orismos tou path pou einai to arxeio p tha diabazoume
-                string[] dirs = Directory.GetFiles(@"C:\\Users\\Bill\\Documents\\GitHubVisualStudio\\sqlBackup\\sqlBackup\\sqlBackup\\ScheduleFile\\");
+                string[] dirs = Directory.GetFiles(@schedulefile2);
                 //trexei gia osa arxeia exei o fakelos
                 foreach (string dir in dirs)
                 {
-
-                    stringsave = new StringBuilder();
-                    string[] pin = getbackup();
-
-                    for (int k = 0; k < pin.Length; k++)
-                    {
-                        Console.WriteLine(pin[k].ToString());
+                    if (dbBackUp.Any()) {
+                        dbBackUp.Clear();
                     }
-
+                    stringsave = new StringBuilder();
                     schedulefile = dir;
                     tcpclnt = new TcpClient();
                     //anoigma tou areiou
@@ -186,24 +181,16 @@ namespace BackUpDb
                     setFtpusername(readfromLoad.ReadLine());
                     setFtppassword(readfromLoad.ReadLine());
                     setEmail(readfromLoad.ReadLine());
-
                     int i = 0;
-                    {
+                    do{
 
                         setbackup(readfromLoad.ReadLine());
                         i++;
-
                     } while (!(readfromLoad.EndOfStream)) ;
-
-                    for (int k = 0; k < pin.Length; k++)
-                    {
-                        Console.WriteLine(pin[k].ToString());
-                    }
-
                     tcpclnt.Connect(hostname, Convert.ToInt32(port));
                     if (tcpclnt.Connected)
                     {
-                        BackupDb back = new BackupDb(getHostname(), getUsername(), getPassword(), getbackup(), @"C:\Users\Bill\AppData\Roaming\sqlbackup\", getFtphostname(), getFtpusername(), getFtppassword());
+                        BackupDb back = new BackupDb(getHostname(), getUsername(), getPassword(), getbackup(), @"C:\Users\swthrhs\AppData\Roaming\sqlbackup", getFtphostname(), getFtpusername(), getFtppassword());
                         back.downloadDb();
                         tcpclnt.Close();
                     }
@@ -212,6 +199,7 @@ namespace BackUpDb
             catch (Exception ex)
             {
                 MessageBox.Show(ex.StackTrace);
+                Console.WriteLine(ex.StackTrace);
             }
         }
         public Boolean Connected()
