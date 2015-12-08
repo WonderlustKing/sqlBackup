@@ -30,7 +30,7 @@ namespace BackUpDb
         private string ftpUsername;
         private string ftpPassword;
         private string local_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\sqlbackup\\";
-        private string schedulefile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+        private string schedulefile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName+ "\\ScheduleFile\\";
         Save saveschedulefile = null;
         public Form2()
         {
@@ -85,20 +85,31 @@ namespace BackUpDb
             {
                 try
                 {
+                    int selectedDbNum = DatabasesCheckedListBox.CheckedItems.Count;
 
+                    //array with selected databases number length, for store all selected databases
+                    string[] dbForBackup = new string[selectedDbNum];
+                    //get names of selected databases
+                    int i = 0;
+                    foreach (object itemChecked in DatabasesCheckedListBox.CheckedItems)
+                    {
+                        dbForBackup[i] = itemChecked.ToString();
+                        i++;
+                    }
+                   
                     if (SchedulecheckBox.Checked)
                     {
                         TimeSpan time = ScheduleTime.Value.TimeOfDay;
 
                         if (this.connectForm.getConnection)
                         {
-                            saveschedulefile = new Save(time, this.connectForm.getHostname, this.connectForm.getPort, connectForm.getUsername, connectForm.getPassword, this.FTPHost, this.FTPusername, this.FTPpasswd, emailtextBox.Text, this.getDBBackedUp);
+                            saveschedulefile = new Save(time, this.connectForm.getHostname, this.connectForm.getPort, connectForm.getUsername, connectForm.getPassword, this.FTPHost, this.FTPusername, this.FTPpasswd, emailtextBox.Text, dbForBackup);
                             saveschedulefile.ScheduleFile(schedulefile);
                             ErrorScheduleLabel.Text = "Schedule completed sucessfully";
                         }
                         else if (this.connectForm.getConnection2)
                         {
-                            saveschedulefile = new Save(time, this.connectForm.getHostname2, this.connectForm.getPort2, this.connectForm.getUsername2, this.connectForm.getPassword2, this.FTPHost, this.FTPusername, this.FTPpasswd, emailtextBox.Text, this.getDBBackedUp);
+                            saveschedulefile = new Save(time, this.connectForm.getHostname2, this.connectForm.getPort2, this.connectForm.getUsername2, this.connectForm.getPassword2, this.FTPHost, this.FTPusername, this.FTPpasswd, emailtextBox.Text, dbForBackup);
                             saveschedulefile.ScheduleFile(schedulefile);
                             ErrorScheduleLabel.Text = "Schedule completed sucessfully";
 
@@ -122,7 +133,7 @@ namespace BackUpDb
 
         private void Form2_Load(object sender, EventArgs e)
         {
-
+            Console.WriteLine(schedulefile);
             if ((this.connectForm.getConnection)||(this.connectForm.getConnection2))
             {
                 tbLocalDest.Text = local_path;

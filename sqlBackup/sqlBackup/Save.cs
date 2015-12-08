@@ -146,6 +146,7 @@ namespace BackUpDb
         {
             path += "\\"+getHostname()+".txt";
             StreamWriter ScheduleFile = null;
+            Console.WriteLine(path);
             if (File.Exists(Convert.ToString(path)))
             {//elenxo an to arxeio uparxei
                 ScheduleFile = new StreamWriter(Convert.ToString(path)); //antikeimeno gia na grapsw sto arxeio to opio kai ftiaxnw
