@@ -55,10 +55,10 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.email = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.ErrorScheduleLabel = new System.Windows.Forms.Label();
             this.Scheduler = new System.Windows.Forms.Label();
             this.DatabasesCheckedListBox = new System.Windows.Forms.CheckedListBox();
             this.button = new System.Windows.Forms.Button();
-            this.ErrorScheduleLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -194,7 +194,8 @@
             this.ScheduleTime.ShowUpDown = true;
             this.ScheduleTime.Size = new System.Drawing.Size(85, 20);
             this.ScheduleTime.TabIndex = 9;
-            this.ScheduleTime.Value = new System.DateTime(2015, 10, 27, 12, 25, 0, 0);
+            this.ScheduleTime.Value = new System.DateTime(2015, 12, 11, 12, 25, 0, 0);
+            this.ScheduleTime.ValueChanged += new System.EventHandler(this.ScheduleTime_ValueChanged);
             // 
             // SetSchedulebutton
             // 
@@ -313,6 +314,14 @@
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
             // 
+            // ErrorScheduleLabel
+            // 
+            this.ErrorScheduleLabel.AutoSize = true;
+            this.ErrorScheduleLabel.Location = new System.Drawing.Point(13, 100);
+            this.ErrorScheduleLabel.Name = "ErrorScheduleLabel";
+            this.ErrorScheduleLabel.Size = new System.Drawing.Size(0, 13);
+            this.ErrorScheduleLabel.TabIndex = 11;
+            // 
             // Scheduler
             // 
             this.Scheduler.AutoSize = true;
@@ -341,14 +350,6 @@
             this.button.Text = "Get backup and store";
             this.button.UseVisualStyleBackColor = true;
             this.button.Click += new System.EventHandler(this.button_Click);
-            // 
-            // ErrorScheduleLabel
-            // 
-            this.ErrorScheduleLabel.AutoSize = true;
-            this.ErrorScheduleLabel.Location = new System.Drawing.Point(13, 100);
-            this.ErrorScheduleLabel.Name = "ErrorScheduleLabel";
-            this.ErrorScheduleLabel.Size = new System.Drawing.Size(0, 13);
-            this.ErrorScheduleLabel.TabIndex = 11;
             // 
             // Form2
             // 

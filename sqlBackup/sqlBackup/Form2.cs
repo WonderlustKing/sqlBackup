@@ -15,6 +15,8 @@ using System.Diagnostics;
 using sqlBackup;
 using System.Data.OleDb;
 using MySql.Data.MySqlClient;
+using Microsoft.Win32.TaskScheduler;
+
 
 namespace BackUpDb
 {
@@ -31,6 +33,8 @@ namespace BackUpDb
         private string ftpPassword;
         private string local_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\sqlbackup\\";
         private string schedulefile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName+ "\\ScheduleFile\\";
+        private string schedulerexe = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName + "\\Scheduler\\bin\\Debug\\Scheduler.exe";
+
         Save saveschedulefile = null;
         public Form2()
         {
@@ -81,48 +85,94 @@ namespace BackUpDb
 
         private void Runbutton_Click(object sender, EventArgs e)
         {
-            if ((((this.connectForm.getConnection) || (this.connectForm.getConnection2))))
-            {
+
+            
+            
+                if ((((this.connectForm.getConnection) || (this.connectForm.getConnection2))))
+                {
+                    try
+                    {
+                        int selectedDbNum = DatabasesCheckedListBox.CheckedItems.Count;
+
+                        //array with selected databases number length, for store all selected databases
+                        string[] dbForBackup = new string[selectedDbNum];
+                        //get names of selected databases
+                        int i = 0;
+                        foreach (object itemChecked in DatabasesCheckedListBox.CheckedItems)
+                        {
+                            dbForBackup[i] = itemChecked.ToString();
+                            i++;
+                        }
+
+                        if (SchedulecheckBox.Checked)
+                        {
+                            TimeSpan time = ScheduleTime.Value.TimeOfDay;
+
+                            if (this.connectForm.getConnection)
+                            {
+                                saveschedulefile = new Save(time, this.connectForm.getHostname, this.connectForm.getPort, connectForm.getUsername, connectForm.getPassword, this.FTPHost, this.FTPusername, this.FTPpasswd, emailtextBox.Text, dbForBackup);
+                                saveschedulefile.ScheduleFile(schedulefile);
+                                ErrorScheduleLabel.Text = "Schedule completed sucessfully";
+                            }
+                            else if (this.connectForm.getConnection2)
+                            {
+                                saveschedulefile = new Save(time, this.connectForm.getHostname2, this.connectForm.getPort2, this.connectForm.getUsername2, this.connectForm.getPassword2, this.FTPHost, this.FTPusername, this.FTPpasswd, emailtextBox.Text, dbForBackup);
+                                saveschedulefile.ScheduleFile(schedulefile);
+                                ErrorScheduleLabel.Text = "Schedule completed sucessfully";
+
+                            }
+                        }
+
+                    }
+                    catch (Exception x)
+                    {
+                        ErrorScheduleLabel.Text = "Choose a database first";
+                    }
+
                 try
                 {
-                    int selectedDbNum = DatabasesCheckedListBox.CheckedItems.Count;
-
-                    //array with selected databases number length, for store all selected databases
-                    string[] dbForBackup = new string[selectedDbNum];
-                    //get names of selected databases
-                    int i = 0;
-                    foreach (object itemChecked in DatabasesCheckedListBox.CheckedItems)
-                    {
-                        dbForBackup[i] = itemChecked.ToString();
-                        i++;
-                    }
-                   
-                    if (SchedulecheckBox.Checked)
+                    using (TaskService ts = new TaskService())
                     {
                         TimeSpan time = ScheduleTime.Value.TimeOfDay;
+                        TaskDefinition td = ts.NewTask();
 
-                        if (this.connectForm.getConnection)
-                        {
-                            saveschedulefile = new Save(time, this.connectForm.getHostname, this.connectForm.getPort, connectForm.getUsername, connectForm.getPassword, this.FTPHost, this.FTPusername, this.FTPpasswd, emailtextBox.Text, dbForBackup);
-                            saveschedulefile.ScheduleFile(schedulefile);
-                            ErrorScheduleLabel.Text = "Schedule completed sucessfully";
-                        }
-                        else if (this.connectForm.getConnection2)
-                        {
-                            saveschedulefile = new Save(time, this.connectForm.getHostname2, this.connectForm.getPort2, this.connectForm.getUsername2, this.connectForm.getPassword2, this.FTPHost, this.FTPusername, this.FTPpasswd, emailtextBox.Text, dbForBackup);
-                            saveschedulefile.ScheduleFile(schedulefile);
-                            ErrorScheduleLabel.Text = "Schedule completed sucessfully";
+                        td.RegistrationInfo.Description = "This task will backup your files that the user has choses for the user" + this.connectForm.getHostname2;
+                        td.Principal.DisplayName = this.connectForm.getHostname2;
+                        td.Principal.RunLevel = TaskRunLevel.Highest;
 
-                        }
+                        DailyTrigger dt = new DailyTrigger();
+                        dt.StartBoundary = DateTime.Today + TimeSpan.FromHours(Convert.ToDouble(time.Hours)) + TimeSpan.FromMinutes(Convert.ToDouble(time.Minutes));
+                        dt.DaysInterval = 1;
+
+                        td.Triggers.Add(dt);
+
+                        td.Settings.MultipleInstances = TaskInstancesPolicy.Parallel;
+                        //td.Settings.RunOnlyIfNetworkAvailable = true;
+                        //td.Settings.ExecutionTimeLimit = TimeSpan.Parse("24");
+                        td.Settings.DisallowStartIfOnBatteries = false;
+                     
+
+                        ExecAction et = new ExecAction(schedulerexe, this.connectForm.getHostname2, null);
+                        td.Actions.Add(et);
+
+                        td.Settings.WakeToRun = true;
+                        //td.Settings.Hidden = true;
+                        td.Settings.StartWhenAvailable = true;
+                        td.Settings.Priority = ProcessPriorityClass.High;
+
+                        ts.RootFolder.RegisterTaskDefinition(this.connectForm.getHostname2, td);
+
+
                     }
+                }
+                catch (Exception ex) { Console.WriteLine(ex.StackTrace);
+                    Console.WriteLine(ex.Message);
+                }
 
-                }
-                catch (Exception x)
-                {
-                    ErrorScheduleLabel.Text = "Choose a database first";
-                }
             }
-        }
+
+            }
+        
 
         private void Form2_Click(object sender, EventArgs e)
         {
@@ -347,6 +397,11 @@ namespace BackUpDb
         }
 
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ScheduleTime_ValueChanged(object sender, EventArgs e)
         {
 
         }

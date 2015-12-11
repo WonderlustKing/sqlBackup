@@ -24,6 +24,7 @@ namespace BackUpDb
         private String ftppassword;
         private String email;
         private List<String> dbBackUp = new List<string>();
+        private string local_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\sqlbackup\\";
 
         StringBuilder stringsave = null;
 
@@ -190,7 +191,7 @@ namespace BackUpDb
                     tcpclnt.Connect(hostname, Convert.ToInt32(port));
                     if (tcpclnt.Connected)
                     {
-                        BackupDb back = new BackupDb(getHostname(), getUsername(), getPassword(), getbackup(), @"C:\Users\swthrhs\AppData\Roaming\sqlbackup", getFtphostname(), getFtpusername(), getFtppassword());
+                        BackupDb back = new BackupDb(getHostname(), getUsername(), getPassword(), getbackup(), @local_path, getFtphostname(), getFtpusername(), getFtppassword());
                         back.downloadDb();
                         tcpclnt.Close();
                     }

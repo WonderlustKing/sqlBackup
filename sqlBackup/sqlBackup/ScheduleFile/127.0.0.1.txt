@@ -3,9 +3,8 @@
 3306
 root
 
-testbed.it.teithe.gr
-user1
-Fj98(de#
 
-information_schema
-cdcol
+
+
+
+performance_schema
