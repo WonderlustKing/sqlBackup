@@ -131,18 +131,19 @@ namespace BackUpDb
 
                 try
                 {
+                    TimeSpan time = ScheduleTime.Value.TimeOfDay;
                     using (TaskService ts = new TaskService())
                     {
-                        TimeSpan time = ScheduleTime.Value.TimeOfDay;
                         TaskDefinition td = ts.NewTask();
 
-                        td.RegistrationInfo.Description = "This task will backup your files that the user has choses for the user" + this.connectForm.getHostname2;
-                        td.Principal.DisplayName = this.connectForm.getHostname2;
+                        td.RegistrationInfo.Description = "This task will backup your files that the user has choses for the user" + "test user";
+                        //td.Principal.DisplayName = this.connectForm.getHostname2;
                         td.Principal.RunLevel = TaskRunLevel.Highest;
 
                         DailyTrigger dt = new DailyTrigger();
                         dt.StartBoundary = DateTime.Today + TimeSpan.FromHours(Convert.ToDouble(time.Hours)) + TimeSpan.FromMinutes(Convert.ToDouble(time.Minutes));
                         dt.DaysInterval = 1;
+                        dt.Enabled = true;
 
                         td.Triggers.Add(dt);
 
@@ -150,23 +151,23 @@ namespace BackUpDb
                         //td.Settings.RunOnlyIfNetworkAvailable = true;
                         //td.Settings.ExecutionTimeLimit = TimeSpan.Parse("24");
                         td.Settings.DisallowStartIfOnBatteries = false;
-                     
-
-                        ExecAction et = new ExecAction(schedulerexe, this.connectForm.getHostname2, null);
-                        td.Actions.Add(et);
-
                         td.Settings.WakeToRun = true;
-                        //td.Settings.Hidden = true;
+                        td.Settings.Hidden = true;
                         td.Settings.StartWhenAvailable = true;
                         td.Settings.Priority = ProcessPriorityClass.High;
 
-                        ts.RootFolder.RegisterTaskDefinition(this.connectForm.getHostname2, td);
+                        td.Actions.Add(new ExecAction(schedulerexe,null, null));
+                        //ExecAction et = new ExecAction(schedulerexe, null, null);
+                        //td.Actions.Add(et);
 
+                        ts.RootFolder.RegisterTaskDefinition(this.connectForm.getUsername2, td);
 
                     }
                 }
-                catch (Exception ex) { Console.WriteLine(ex.StackTrace);
-                    Console.WriteLine(ex.Message);
+                catch (Exception exk) {
+                    MessageBox.Show(exk.Source);
+                    MessageBox.Show(exk.Message);
+                    MessageBox.Show(exk.StackTrace);
                 }
 
             }
