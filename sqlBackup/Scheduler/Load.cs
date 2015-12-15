@@ -25,6 +25,8 @@ namespace BackUpDb
         private String email;
         private List<String> dbBackUp = new List<string>();
         private string local_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\sqlbackup\\";
+       
+
 
         StringBuilder stringsave = null;
 
@@ -155,11 +157,12 @@ namespace BackUpDb
         {
             try
             {
-
+                
                 string schedulefile = null;
-                string schedulefile2 = @Directory.GetParent(@Directory.GetCurrentDirectory()).Parent.Parent.FullName + @"\sqlBackup\ScheduleFile\";
+                string schedulefile2 = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName+ @"\sqlBackup\ScheduleFile\127.0.0.1";
+                
                 //orismos tou path pou einai to arxeio p tha diabazoume
-                string[] dirs = Directory.GetFiles(@schedulefile2);
+                string[] dirs = Directory.GetFiles(schedulefile2);
                 //trexei gia osa arxeia exei o fakelos
                 foreach (string dir in dirs)
                 {
@@ -167,7 +170,7 @@ namespace BackUpDb
                         dbBackUp.Clear();
                     }
                     stringsave = new StringBuilder();
-                    schedulefile = dir;
+                    schedulefile = schedulefile2;
                     tcpclnt = new TcpClient();
                     //anoigma tou areiou
                     StreamReader readfromLoad = new StreamReader(schedulefile);
@@ -200,7 +203,9 @@ namespace BackUpDb
             catch (Exception ex)
             {
                 MessageBox.Show(ex.StackTrace);
-                Console.WriteLine(ex.StackTrace);
+                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Source);
+                Application.Exit();
             }
         }
         public Boolean Connected()
