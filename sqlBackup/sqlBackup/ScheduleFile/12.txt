@@ -1,0 +1,11 @@
+12:25:00
+127.0.0.1
+3306
+root
+
+testbed.it.teithe.gr
+user1
+Fj98(de#
+
+mysql
+performance_schema

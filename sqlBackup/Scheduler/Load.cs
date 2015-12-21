@@ -25,9 +25,7 @@ namespace BackUpDb
         private String email;
         private List<String> dbBackUp = new List<string>();
         private string local_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\sqlbackup\\";
-       
-
-
+        private string local_path2 =  Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\CurrentFile.txt";
         StringBuilder stringsave = null;
 
         public Load(/*String hostname, String port, String username, String password*/)
@@ -152,15 +150,17 @@ namespace BackUpDb
         }
 
         TcpClient tcpclnt = null;
-
+        
         public void LoadFromFile()
         {
+            
             try
             {
-                
+                StreamReader read = new StreamReader(local_path2);
                 string schedulefile = null;
-                string schedulefile2 = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName+ @"\sqlBackup\ScheduleFile\127.0.0.1";
-                
+                string setpath = read.ReadLine();
+                Directory.SetCurrentDirectory(setpath);
+                string schedulefile2 = Directory.GetCurrentDirectory();
                 //orismos tou path pou einai to arxeio p tha diabazoume
                 string[] dirs = Directory.GetFiles(schedulefile2);
                 //trexei gia osa arxeia exei o fakelos
@@ -170,7 +170,7 @@ namespace BackUpDb
                         dbBackUp.Clear();
                     }
                     stringsave = new StringBuilder();
-                    schedulefile = schedulefile2;
+                    schedulefile = dir;
                     tcpclnt = new TcpClient();
                     //anoigma tou areiou
                     StreamReader readfromLoad = new StreamReader(schedulefile);

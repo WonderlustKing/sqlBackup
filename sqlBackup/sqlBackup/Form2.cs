@@ -16,6 +16,7 @@ using sqlBackup;
 using System.Data.OleDb;
 using MySql.Data.MySqlClient;
 using Microsoft.Win32.TaskScheduler;
+using System.Security.Principal;
 
 
 namespace BackUpDb
@@ -90,10 +91,16 @@ namespace BackUpDb
             
                 if ((((this.connectForm.getConnection) || (this.connectForm.getConnection2))))
                 {
-                    try
+                string path2 = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)+"\\CurrentFile.txt";
+                MessageBox.Show(path2);
+                string path =(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName +@"\sqlBackup\ScheduleFile\");
+               StreamWriter write = new StreamWriter(path2);
+                write.Write(path);
+               write.Close();
+                try
                     {
                         int selectedDbNum = DatabasesCheckedListBox.CheckedItems.Count;
-
+                        
                         //array with selected databases number length, for store all selected databases
                         string[] dbForBackup = new string[selectedDbNum];
                         //get names of selected databases
@@ -131,6 +138,7 @@ namespace BackUpDb
 
                 try
                 {
+                    MessageBox.Show(Convert.ToString(IsUserAdministrator()));
                     TimeSpan time = ScheduleTime.Value.TimeOfDay;
                     using (TaskService ts = new TaskService())
                     {
@@ -184,7 +192,7 @@ namespace BackUpDb
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            Console.WriteLine(schedulefile);
+            
             if ((this.connectForm.getConnection)||(this.connectForm.getConnection2))
             {
                 tbLocalDest.Text = local_path;
@@ -406,5 +414,25 @@ namespace BackUpDb
         {
 
         }
+        public bool IsUserAdministrator()
+        {
+            bool isAdmin;
+            try
+            {
+                WindowsIdentity user = WindowsIdentity.GetCurrent();
+                WindowsPrincipal principal = new WindowsPrincipal(user);
+                isAdmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                isAdmin = false;
+            }
+            catch (Exception ex)
+            {
+                isAdmin = false;
+            }
+            return isAdmin;
+        }
     }
+
 }
