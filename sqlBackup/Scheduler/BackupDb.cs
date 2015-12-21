@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Reflection;
 using Ionic.Zip;
 using System.Net;
+using System.Windows.Forms;
 
 namespace sqlBackup
 {
@@ -24,7 +25,7 @@ namespace sqlBackup
         private String date = null;
         private String time = null;
         // mysqldump.exe path
-        private string mysqldump = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName+"\\mysqldump";
+        private string mysqldump = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName+ "\\sqlBackup\\mysqldump";
         // user application path for sqlbackup(where everything will be saved here)
         private string user_path;
 
@@ -48,8 +49,11 @@ namespace sqlBackup
         // backup a database
         public string downloadDb()
         {
+            MessageBox.Show("DUmp"+mysqldump);
+            MessageBox.Show("Current DIrectory: "+Directory.GetCurrentDirectory());
             if (numsOfDatabases > 0)
             {
+                
                 try
                 {
                     System.
