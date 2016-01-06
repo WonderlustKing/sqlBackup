@@ -205,6 +205,7 @@
             this.SetSchedulebutton.TabIndex = 10;
             this.SetSchedulebutton.Text = "Set Schedule";
             this.SetSchedulebutton.UseVisualStyleBackColor = true;
+            this.SetSchedulebutton.Visible = false;
             this.SetSchedulebutton.Click += new System.EventHandler(this.Runbutton_Click);
             // 
             // selectDestLabel
@@ -313,6 +314,7 @@
             this.groupBox3.Size = new System.Drawing.Size(256, 116);
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
+            this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
             // 
             // ErrorScheduleLabel
             // 

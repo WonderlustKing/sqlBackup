@@ -35,6 +35,7 @@ namespace BackUpDb
         private string local_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\sqlbackup\\";
         private string schedulefile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName+ "\\ScheduleFile\\";
         private string schedulerexe = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName + "\\Scheduler\\bin\\Debug\\Scheduler.exe";
+        int counter = 1;
 
         Save saveschedulefile = null;
         public Form2()
@@ -56,11 +57,14 @@ namespace BackUpDb
         {
             if (SchedulecheckBox.Checked)
             {
+
+                SetSchedulebutton.Visible = true;
                 ScheduleLabel.Enabled = true;
                 ScheduleTime.Enabled = true;
                 
             } else
             {
+                SetSchedulebutton.Visible = false;
                 ScheduleLabel.Enabled = false;
                 ScheduleTime.Enabled = false;
             }
@@ -138,16 +142,19 @@ namespace BackUpDb
 
                 try
                 {
-                    MessageBox.Show(Convert.ToString(IsUserAdministrator()));
+
+                    //MessageBox.Show(Convert.ToString(IsUserAdministrator()));
                     TimeSpan time = ScheduleTime.Value.TimeOfDay;
                     using (TaskService ts = new TaskService())
                     {
                         TaskDefinition td = ts.NewTask();
 
-                        td.RegistrationInfo.Description = "This task will backup your files that the user has choses for the user" + "test user";
-                        //td.Principal.DisplayName = this.connectForm.getHostname2;
+                        //δημηουργια ονοματος και description για το schedule
+                        td.RegistrationInfo.Description = "This task will backup the database that the user has chosen ";
+                        td.Principal.DisplayName = "sqlBckup" + counter;
                         td.Principal.RunLevel = TaskRunLevel.Highest;
 
+                        //δημιουργια triiger ο οποίος θα τρέχει κάθε μέρα
                         DailyTrigger dt = new DailyTrigger();
                         dt.StartBoundary = DateTime.Today + TimeSpan.FromHours(Convert.ToDouble(time.Hours)) + TimeSpan.FromMinutes(Convert.ToDouble(time.Minutes));
                         dt.DaysInterval = 1;
@@ -155,21 +162,30 @@ namespace BackUpDb
 
                         td.Triggers.Add(dt);
 
+                        //προσθεση ρυθμiσeων για το πως θα τρέχει το schedule
                         td.Settings.MultipleInstances = TaskInstancesPolicy.Parallel;
-                        //td.Settings.RunOnlyIfNetworkAvailable = true;
-                        //td.Settings.ExecutionTimeLimit = TimeSpan.Parse("24");
+                        td.Settings.ExecutionTimeLimit = TimeSpan.FromHours(23);
                         td.Settings.DisallowStartIfOnBatteries = false;
                         td.Settings.WakeToRun = true;
                         td.Settings.Hidden = true;
                         td.Settings.StartWhenAvailable = true;
                         td.Settings.Priority = ProcessPriorityClass.High;
 
-                        td.Actions.Add(new ExecAction(schedulerexe,null, null));
+                        //προσθηκη exe action που δείχνει πιο exe θα τρεχει οταν ερθει η ωρα του schedule
+                        td.Actions.Add(new ExecAction(schedulerexe, null, null));
+
                         //ExecAction et = new ExecAction(schedulerexe, null, null);
                         //td.Actions.Add(et);
 
-                        ts.RootFolder.RegisterTaskDefinition(this.connectForm.getUsername2, td);
 
+
+                        //δημιουργία του schedule
+
+                        ts.RootFolder.RegisterTaskDefinition("sqlBackup" + counter, td);
+
+                        counter++;
+
+                        ErrorScheduleLabel.Text = "Schedule sucessfull created";
                     }
                 }
                 catch (Exception exk) {
@@ -432,6 +448,11 @@ namespace BackUpDb
                 isAdmin = false;
             }
             return isAdmin;
+        }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 
