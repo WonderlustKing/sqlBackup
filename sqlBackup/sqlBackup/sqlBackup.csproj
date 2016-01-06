@@ -43,7 +43,7 @@
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Dino Chiesa\DotNetZip Runtime 1.9\Ionic.Zip.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Win32.TaskScheduler">
-      <HintPath>..\..\..\..\GitHub\Desktop\v4.0\Microsoft.Win32.TaskScheduler.dll</HintPath>
+      <HintPath>..\..\..\..\..\Downloads\TaskScheduler\v2.0\Microsoft.Win32.TaskScheduler.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />

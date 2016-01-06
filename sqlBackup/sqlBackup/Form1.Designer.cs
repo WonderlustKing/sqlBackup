@@ -41,7 +41,6 @@
             this.porttextbox = new System.Windows.Forms.TextBox();
             this.SaveCheckBox = new System.Windows.Forms.CheckBox();
             this.MySQLRadiobutton = new System.Windows.Forms.RadioButton();
-            this.OracleRadionButton = new System.Windows.Forms.RadioButton();
             this.LoadButton = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.savedlabel = new System.Windows.Forms.Label();
@@ -149,23 +148,14 @@
             // 
             this.MySQLRadiobutton.AutoSize = true;
             this.MySQLRadiobutton.Checked = true;
-            this.MySQLRadiobutton.Location = new System.Drawing.Point(332, 12);
+            this.MySQLRadiobutton.Location = new System.Drawing.Point(332, 32);
             this.MySQLRadiobutton.Name = "MySQLRadiobutton";
             this.MySQLRadiobutton.Size = new System.Drawing.Size(60, 17);
             this.MySQLRadiobutton.TabIndex = 13;
             this.MySQLRadiobutton.TabStop = true;
             this.MySQLRadiobutton.Text = "MySQL";
             this.MySQLRadiobutton.UseVisualStyleBackColor = true;
-            // 
-            // OracleRadionButton
-            // 
-            this.OracleRadionButton.AutoSize = true;
-            this.OracleRadionButton.Location = new System.Drawing.Point(332, 36);
-            this.OracleRadionButton.Name = "OracleRadionButton";
-            this.OracleRadionButton.Size = new System.Drawing.Size(56, 17);
-            this.OracleRadionButton.TabIndex = 14;
-            this.OracleRadionButton.Text = "Oracle";
-            this.OracleRadionButton.UseVisualStyleBackColor = true;
+            this.MySQLRadiobutton.CheckedChanged += new System.EventHandler(this.MySQLRadiobutton_CheckedChanged);
             // 
             // LoadButton
             // 
@@ -201,7 +191,6 @@
             this.Controls.Add(this.wheresaved);
             this.Controls.Add(this.savedlabel);
             this.Controls.Add(this.LoadButton);
-            this.Controls.Add(this.OracleRadionButton);
             this.Controls.Add(this.MySQLRadiobutton);
             this.Controls.Add(this.SaveCheckBox);
             this.Controls.Add(this.porttextbox);
@@ -237,7 +226,6 @@
         private System.Windows.Forms.TextBox porttextbox;
         private System.Windows.Forms.CheckBox SaveCheckBox;
         private System.Windows.Forms.RadioButton MySQLRadiobutton;
-        private System.Windows.Forms.RadioButton OracleRadionButton;
         private System.Windows.Forms.Button LoadButton;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Label savedlabel;
