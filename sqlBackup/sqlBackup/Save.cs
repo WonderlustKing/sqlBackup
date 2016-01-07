@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
-
+using sqlBackup;
 
 namespace BackUpDb
 {
@@ -183,6 +183,30 @@ namespace BackUpDb
                     ScheduleFile.WriteLine(this.dbbase[i]);
                 }
                 ScheduleFile.Close();
+            }
+        }
+
+        public void logFile(String path)
+        {
+            
+            path += "\\logfile.txt";
+            StreamWriter LogFile = null;
+            Console.WriteLine(path);
+            BackupDb bdb = new BackupDb();
+
+            if(File.Exists(Convert.ToString(path)))
+            {
+
+                LogFile = new StreamWriter(Convert.ToString(path));
+                LogFile.WriteLine(bdb.getDate);
+                LogFile.WriteLine(bdb.getTime);
+                LogFile.Close();
+            } else
+            {
+
+                LogFile = new StreamWriter(Convert.ToString(path));
+                LogFile.WriteLine(bdb.getDate);
+                LogFile.WriteLine(bdb.getTime);
             }
         }
     }

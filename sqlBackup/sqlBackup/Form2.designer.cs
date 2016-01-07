@@ -117,8 +117,9 @@
             // logFileToolStripMenuItem
             // 
             this.logFileToolStripMenuItem.Name = "logFileToolStripMenuItem";
-            this.logFileToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.logFileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.logFileToolStripMenuItem.Text = "Log File";
+            this.logFileToolStripMenuItem.Click += new System.EventHandler(this.logFileToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
