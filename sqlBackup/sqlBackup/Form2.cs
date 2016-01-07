@@ -32,12 +32,14 @@ namespace BackUpDb
         private string ftpHost;
         private string ftpUsername;
         private string ftpPassword;
+        private string port;
         private string local_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\sqlbackup\\";
         private string schedulefile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName+ "\\ScheduleFile\\";
         private string schedulerexe = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName + "\\Scheduler\\bin\\Debug\\Scheduler.exe";
         int counter = 1;
 
         Save saveschedulefile = null;
+
         public Form2()
         {
             InitializeComponent();
@@ -337,6 +339,11 @@ namespace BackUpDb
             set { ftpPassword = value; }
         }
 
+        public string getPort
+        {
+            get { return port; }
+            set { port = value; }
+        }
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             if(ftpOptions == null)
@@ -451,6 +458,11 @@ namespace BackUpDb
         }
 
         private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void logFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }

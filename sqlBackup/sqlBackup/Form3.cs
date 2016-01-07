@@ -7,11 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace BackUpDb
 {
     public partial class Form3 : Form
     {
+        private string logfile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\logFile.txt";
+
+        Save savelogfile = null;
+
         public Form3()
         {
             InitializeComponent();
@@ -82,6 +87,12 @@ namespace BackUpDb
                              "DataBase(s): " + Convert.ToString(databases) + "\n" + "Day: "+connectform2.getDate + "\n" + "Time: " + connectform2.getTime;
             }
             
+            if(connectform2.getConnection)
+            {
+
+                savelogfile = new Save(this.connectform2.getHostname, this.connectform2.getPort, connectform2.getUsername, connectform2.getPassword);
+                savelogfile.logFile(logfile);
+            }
         }
     }
 }
