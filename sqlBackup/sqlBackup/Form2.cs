@@ -409,7 +409,7 @@ namespace BackUpDb
                 if (response.Equals("Backup completed successfully!"))
                 {
                     success = true;
-                    Console.WriteLine(success);
+                    
                 }
 
                 if(success)
@@ -437,6 +437,7 @@ namespace BackUpDb
         {
 
         }
+        /*
         public bool IsUserAdministrator()
         {
             bool isAdmin;
@@ -456,7 +457,7 @@ namespace BackUpDb
             }
             return isAdmin;
         }
-
+        */
         private void groupBox3_Enter(object sender, EventArgs e)
         {
 

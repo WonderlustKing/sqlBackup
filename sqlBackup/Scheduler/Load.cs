@@ -150,12 +150,13 @@ namespace BackUpDb
         }
 
         TcpClient tcpclnt = null;
-        
+        SendEmail mail = null;
         public void LoadFromFile()
         {
             
             try
             {
+                
                 StreamReader read = new StreamReader(local_path2);
                 string schedulefile = null;
                 string setpath = read.ReadLine();
@@ -195,7 +196,19 @@ namespace BackUpDb
                     if (tcpclnt.Connected)
                     {
                         BackupDb back = new BackupDb(getHostname(), getUsername(), getPassword(), getbackup(), @local_path, getFtphostname(), getFtpusername(), getFtppassword());
-                        back.downloadDb();
+                        string respone  =  back.downloadDb();
+                        if (respone.Equals("Backup completed successfully!") &&(getEmaiil()!=String.Empty))
+                        {
+                            mail = new SendEmail(getEmaiil(), respone);
+                            mail.PrepareEmail();
+                            mail.setEmail();
+                        }
+                        else if (getEmaiil() != String.Empty)
+                        {
+                            mail = new SendEmail(getEmaiil(), respone);
+                            mail.PrepareEmail();
+                            mail.setEmail();
+                        }
                         tcpclnt.Close();
                     }
                 }

@@ -78,19 +78,25 @@ namespace BackUpDb
                 
                 label1.Text = "Hostname: " + connectform2.getHostname + "\n" +
                               "Username: "  +connectform2.getUsername + "\n" +
-                             "DataBase(s): "+Convert.ToString(databases) + "\n" + "Day: " + connectform2.getDate + "\n" + "Time: " + connectform2.getTime;
+                             "DataBase(s): "+Convert.ToString(databases) + "\n" + "Day: " + connectform2.getDate + "\n" + "Time: " + connectform2.getTime+"\n"+
+                             "---------------------------------------------------------------------";
             }
             else
             {
                 label1.Text = "Hostname: " + connectform2.getHostname2 + "\n" +
                               "Username: " + connectform2.getUsername2 + "\n" +
-                             "DataBase(s): " + Convert.ToString(databases) + "\n" + "Day: "+connectform2.getDate + "\n" + "Time: " + connectform2.getTime;
+                             "DataBase(s): " + Convert.ToString(databases) + "\n" + "Day: "+connectform2.getDate + "\n" + "Time: " + connectform2.getTime + "\n" +
+                             "---------------------------------------------------------------------";
             }
-            
-            if(connectform2.getConnection)
+
+            if (connectform2.getConnection)
             {
 
-                savelogfile = new Save(this.connectform2.getHostname, this.connectform2.getPort, connectform2.getUsername, connectform2.getPassword);
+                savelogfile = new Save(label1.Text);
+                savelogfile.logFile(logfile);
+            }else if (connectform2.getConnection2)
+            {
+                savelogfile = new Save(label1.Text);
                 savelogfile.logFile(logfile);
             }
         }
