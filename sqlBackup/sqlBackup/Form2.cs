@@ -98,7 +98,6 @@ namespace BackUpDb
                 if ((((this.connectForm.getConnection) || (this.connectForm.getConnection2))))
                 {
                 string path2 = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)+"\\CurrentFile.txt";
-                MessageBox.Show(path2);
                 string path =(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName +@"\sqlBackup\ScheduleFile\");
                StreamWriter write = new StreamWriter(path2);
                 write.Write(path);
@@ -394,13 +393,29 @@ namespace BackUpDb
                 // check if upload to ftp is checked and initialize the backupDB object with suitable constructor
                 if (cbUploadFtp.Checked)
                 {
-                    uploadToFTP = true;
-                    backupDB = new BackupDb(connectForm.getHostname, connectForm.getUsername, connectForm.getPassword, dbForBackup, local_path, ftpHost, ftpUsername, ftpPassword);
+                    if (connectForm.getConnection)
+                    {
+                        uploadToFTP = true;
+                        backupDB = new BackupDb(connectForm.getHostname, connectForm.getUsername, connectForm.getPassword, dbForBackup, local_path, ftpHost, ftpUsername, ftpPassword);
+                    }
+                    else
+                    {
+                        uploadToFTP = true;
+                        backupDB = new BackupDb(connectForm.getHostname2, connectForm.getUsername2, connectForm.getPassword2, dbForBackup, local_path, ftpHost, ftpUsername, ftpPassword);
+                    }
                 }
                 else
                 {
-                    uploadToFTP = false;
-                    backupDB = new BackupDb(connectForm.getHostname, connectForm.getUsername, connectForm.getPassword, dbForBackup, local_path);
+                    if (connectForm.getConnection)
+                    {
+                        uploadToFTP = false;
+                        backupDB = new BackupDb(connectForm.getHostname, connectForm.getUsername, connectForm.getPassword, dbForBackup, local_path);
+                    }
+                    else
+                    {
+                        uploadToFTP = false;
+                        backupDB = new BackupDb(connectForm.getHostname, connectForm.getUsername, connectForm.getPassword, dbForBackup, local_path);
+                    }
                 }
                 //check the response of backupdb() method, if true successed, else failed
                 response = backupDB.downloadDb();
