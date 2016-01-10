@@ -394,15 +394,30 @@ namespace BackUpDb
                 // check if upload to ftp is checked and initialize the backupDB object with suitable constructor
                 if (cbUploadFtp.Checked)
                 {
-                    uploadToFTP = true;
-                    backupDB = new BackupDb(connectForm.getHostname, connectForm.getUsername, connectForm.getPassword, dbForBackup, local_path, ftpHost, ftpUsername, ftpPassword);
+                    if (connectForm.getConnection)
+                    {
+                        uploadToFTP = true;
+                        backupDB = new BackupDb(connectForm.getHostname, connectForm.getUsername, connectForm.getPassword, dbForBackup, local_path, ftpHost, ftpUsername, ftpPassword);
+                    }
+                    else
+                    {
+                        uploadToFTP = true;
+                        backupDB = new BackupDb(connectForm.getHostname2, connectForm.getUsername2, connectForm.getPassword2, dbForBackup, local_path, ftpHost, ftpUsername, ftpPassword);
+                    }
                 }
                 else
                 {
-                    uploadToFTP = false;
-                    backupDB = new BackupDb(connectForm.getHostname, connectForm.getUsername, connectForm.getPassword, dbForBackup, local_path);
+                    if(connectForm.getConnection)
+                    {
+                        uploadToFTP = false;
+                        backupDB = new BackupDb(connectForm.getHostname, connectForm.getUsername, connectForm.getPassword, dbForBackup, local_path);
+                    }
+                    else
+                    {
+                        uploadToFTP = false;
+                        backupDB = new BackupDb(connectForm.getHostname, connectForm.getUsername, connectForm.getPassword, dbForBackup, local_path);
+                    }
                 }
-
                 //check the response of backupdb() method, if true successed, else failed
                 response = backupDB.downloadDb();
                 MessageBox.Show(response);
@@ -410,7 +425,7 @@ namespace BackUpDb
                 if (response.Equals("Backup completed successfully!"))
                 {
                     success = true;
-                    Console.WriteLine(success);
+                    
                 }
 
                 if(success)
@@ -438,6 +453,7 @@ namespace BackUpDb
         {
 
         }
+        /*
         public bool IsUserAdministrator()
         {
             bool isAdmin;
@@ -457,7 +473,7 @@ namespace BackUpDb
             }
             return isAdmin;
         }
-
+        */
         private void groupBox3_Enter(object sender, EventArgs e)
         {
 

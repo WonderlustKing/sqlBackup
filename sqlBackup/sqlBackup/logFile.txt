@@ -1,0 +1,6 @@
+Hostname: 127.0.0.1
+Username: root
+DataBase(s): performance_schema
+Day: 10/1/2016
+Time: 21:8:34
+---------------------------------------------------------------------
