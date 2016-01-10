@@ -402,6 +402,7 @@ namespace BackUpDb
                     uploadToFTP = false;
                     backupDB = new BackupDb(connectForm.getHostname, connectForm.getUsername, connectForm.getPassword, dbForBackup, local_path);
                 }
+
                 //check the response of backupdb() method, if true successed, else failed
                 response = backupDB.downloadDb();
                 MessageBox.Show(response);

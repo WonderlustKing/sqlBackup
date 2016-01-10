@@ -142,10 +142,5 @@ namespace BackUpDb
         {
 
         }
-
-        private void MySQLRadiobutton_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
